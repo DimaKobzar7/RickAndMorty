@@ -73,6 +73,7 @@ const SelectedCharacterJSX = () => {
           })
         );
 
+        // ! не видит нормально элемнты в пропсах большой карточки если делаешь cardData.payload.data.character
         dispatch(addSingleCharacter(cardData));
 
         // dispatch(addSingleCharacter(cardData.payload.data.character));

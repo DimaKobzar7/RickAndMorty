@@ -12,22 +12,6 @@ const BigCard = (props) => {
   // console.log("props at card:", props);
   const [cardInfo, setCardInfo] = useState({});
 
-  useEffect(() => {
-    const getCardInfo = async () => {
-      if (props) {
-        const data = await props;
-        console.log("data at card:", data);
-        setCardInfo(data);
-      }
-      // const data = await props;
-      // console.log("data at card:", data);
-      // setCardInfo(data);
-    };
-
-    // getCardInfo();
-    // console.log("cardInfo at NO depend:", cardInfo);
-  }, []);
-
   // useEffect(() => {
   //   console.log("cardInfo at depend card info at use effect:", cardInfo);
   // }, [cardInfo]);
@@ -67,17 +51,17 @@ const BigCard = (props) => {
     //   characterSpecies: props.content?.species,
     //   characterLastLocationName: props.content?.location?.name,
     //   characterLastLocationDimension: props.content?.location?.dimension,
-    //   characterStartEpisodeName: props.content?.episode[0]?.name,
-    //   characterStartEpisodeAirDate: props.content?.episode[0]?.air_date,
+    //   characterStartEpisodeName: props.content?.episode?.name,
+    //   characterStartEpisodeAirDate: props.content?.episode?.air_date,
     //   // characterFinalEpisodeName:
-    //   //   props.content?.episode[
-    //   //     props.content?.data?.character?.episode.length - 1
-    //   //   ].name,
+    //   //   props.content?.episode[props.content?.episode.length - 1].name,
     //   // characterFinalEpisodeAirDate:
     //   //   props.content?.episode[props.content?.episode.length - 1].air_date,
     //   // characterOriginName: props.content?.origin.name,
     //   // characterOriginDimension: props.content?.origin.dimension,
     // });
+
+    // console.log("props.content?.episode at big card:", props?.content?.episode);
     // console.log("cardInfo at props depend use ef:", cardInfo);
   }, [props]);
 
