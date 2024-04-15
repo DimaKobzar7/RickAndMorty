@@ -1,7 +1,49 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
 // это в можно .env
 const url = "https://rickandmortyapi.com/graphql";
+
+interface Character {
+  id: number;
+  name: string;
+  status: 'Alive' | 'Dead' | 'unknown';
+  species: string;
+  type?: string;
+  gender: 'Male' | 'Female' | 'Genderless' | 'unknown';
+  origin: {
+    name: string;
+    url: string;
+  };
+  location: {
+    name: string;
+    url: string;
+  };
+  image: string;
+  episode: string[];
+  created: string;
+}
+
+// Определение типов для информации о страницах
+interface PageInfo {
+  count: number;
+  pages: number;
+  next: string | null;
+  prev: string | null;
+}
+
+// Определение типов для ответа от сервера
+interface RickAndMortyResponse {
+  characters: {
+    results: Character[];
+    info: PageInfo;
+  };
+}
+
+// Определение типов для запроса
+interface Query {
+  req: string;
+  filter: string;
+}
 
 // это работает!!!
 export const fetchCharacters = createAsyncThunk(
