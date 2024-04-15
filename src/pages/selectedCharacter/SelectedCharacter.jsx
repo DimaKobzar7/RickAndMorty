@@ -74,9 +74,15 @@ const SelectedCharacterJSX = () => {
         );
 
         dispatch(addSingleCharacter(cardData));
+
+        // dispatch(addSingleCharacter(cardData.payload.data.character));
+        console.log("cardData at selectedCharacter:", cardData);
       }
 
-      console.log("singleCharacter store:", singleCharacter);
+      console.log(
+        "singleCharacter store at selectedCharacter:",
+        singleCharacter
+      );
 
       // console.log("cardData data at async:", cardData);
     };

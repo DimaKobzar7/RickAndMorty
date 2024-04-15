@@ -111,10 +111,13 @@ const secondStoreSlice = createSlice({
     },
     addSingleCharacter(state, action: PayloadAction<Character>) {
       // state.singleCharacter = action.payload;
-      const { data, payload } = action.payload;
+      // const { data, payload } = action.payload;
+      const { payload } = action.payload;
       state.singleCharacter = payload;
-      // console.log("data at store:", data)
-      // console.log(" payload at store destruct:",  payload)
+      // state.singleCharacter = action.payload;
+      // console.log("data at store destruct at addSingleCharacter:", data) 
+      console.log(" payload at store destruct at addSingleCharacter:",  payload)
+      console.log("action at store destruct at addSingleCharacter:",  action)
       // console.log("action.payload at store for singleCharacter:", action.payload)
       // console.log("state.singleCharacter at store for singleCharacter:", state.singleCharacter)
     },
@@ -124,11 +127,14 @@ const secondStoreSlice = createSlice({
       // state.singleCharacter = action.payload;
       // const { data, payload } = action.payload;
       const { payload } = action.payload;
-      console.log("payload at add character:", payload);
-      console.log("action at add character:", action);
+      // console.log("payload at add character:", payload);
+      // console.log("action at add character:", action);
       // state.characters2 = payload;
       // state.characters2 = payload.data.characters.results;
-      state.characters2 = payload.data.characters;
+      // state.characters2 = payload.data.characters;
+      // state.characters2 = payload.results;
+      // state.characters2 = action.payload.results;
+      state.characters2 = action.payload;
 
       // state.characters2 = action.payload.data.characters;
       // state.characters2 = action.payload;

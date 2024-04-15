@@ -35,6 +35,7 @@ const BigCard = (props) => {
   useEffect(() => {
     // console.log("props at depend usse effect:", props);
     // setCardInfo(props);
+    console.log("props at big card at use ef depence props:", props);
     setCardInfo({
       characterImage: props.content?.data?.character?.image,
       characterName: props.content?.data?.character?.name,
@@ -59,27 +60,34 @@ const BigCard = (props) => {
       characterOriginDimension:
         props.content?.data?.character?.origin.dimension,
     });
+    // setCardInfo({
+    //   characterImage: props.content?.image,
+    //   characterName: props.content?.name,
+    //   characterStatus: props.content?.status,
+    //   characterSpecies: props.content?.species,
+    //   characterLastLocationName: props.content?.location?.name,
+    //   characterLastLocationDimension: props.content?.location?.dimension,
+    //   characterStartEpisodeName: props.content?.episode[0]?.name,
+    //   characterStartEpisodeAirDate: props.content?.episode[0]?.air_date,
+    //   // characterFinalEpisodeName:
+    //   //   props.content?.episode[
+    //   //     props.content?.data?.character?.episode.length - 1
+    //   //   ].name,
+    //   // characterFinalEpisodeAirDate:
+    //   //   props.content?.episode[props.content?.episode.length - 1].air_date,
+    //   // characterOriginName: props.content?.origin.name,
+    //   // characterOriginDimension: props.content?.origin.dimension,
+    // });
     // console.log("cardInfo at props depend use ef:", cardInfo);
   }, [props]);
-
-  // const cardImage = cardInfo?.content?.data?.character?.image;
-  // const cardName =
-
-  // console.log("data at card:", data);
-
-  // GSAP
-
-  const cardWrap = useRef(null);
-  const cardImg = useRef(null);
-  const cardBody = useRef(null);
 
   return (
     // {props.characterImage ? 'gg' : 'wp'}
     <>
       {/* это условие надо чтобы не прыгал текст если картинка не успела прогрузится */}
       {cardInfo.characterImage && (
-        <div ref={cardWrap} className={cardStyles["card"]}>
-          <div ref={cardImg} className={cardStyles["card__container-img"]}>
+        <div className={cardStyles["card"]}>
+          <div className={cardStyles["card__container-img"]}>
             <img
               className={cardStyles["card__img"]}
               alt='example'
@@ -87,7 +95,7 @@ const BigCard = (props) => {
             />
           </div>
 
-          <div ref={cardBody} className={cardStyles["card__body"]}>
+          <div className={cardStyles["card__body"]}>
             <div className={cardStyles["card__wrap"]}>
               <h2 className={cardStyles["card__title"]}>
                 {/* {cardInfo?.content?.data?.character?.name} */}
