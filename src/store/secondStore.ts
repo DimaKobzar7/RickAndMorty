@@ -4,7 +4,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 const url = "https://rickandmortyapi.com/graphql";
 
 interface Character {
-  id: number;
+  id: string;
   name: string;
   status: 'Alive' | 'Dead' | 'unknown';
   species: string;
@@ -27,16 +27,16 @@ interface Character {
 interface PageInfo {
   count: number;
   pages: number;
-  next: string | null;
-  prev: string | null;
+  next: number | null;
+  prev: number | null;
 }
 
 // Определение типов для ответа от сервера
 interface RickAndMortyResponse {
-  characters: {
+
     results: Character[];
     info: PageInfo;
-  };
+
 }
 
 // Определение типов для запроса
@@ -50,7 +50,7 @@ export const fetchCharacters = createAsyncThunk(
   "characters2/fetchCharacters",
 
   // : object
-  async function (query) {
+  async function (query: Query) {
     // console.log("query at fetch Characters:", query);
     // console.log("variables at fetch Characters:", variables);
 
@@ -70,7 +70,7 @@ export const fetchCharacters = createAsyncThunk(
       }),
     });
 
-    const result = await response.json();
+    const result: RickAndMortyResponse = await response.json();
 
     console.log("result in fetchCharacters at store with graphql:", result);
 
@@ -82,27 +82,34 @@ const secondStoreSlice = createSlice({
   name: "characters2",
 
   // возможно стоитсделать несколько сторов
+  // initialState: {
+  //   characters2: {},
+  //   DOMloaded: false,
+  //   singleCharacter: {},
+  //   singleCharacterID: "",
+  //   currentPaginationPage: 1,
+  //   disableDownloadBtn: false,
+  //   allCharactersId: {},
+  //   RequestCharactersId: [],
+  // },
   initialState: {
-    characters2: {},
-    DOMloaded: false,
-    singleCharacter: {},
-    singleCharacterID: "",
-    currentPaginationPage: 1,
+    characters2: {} as RickAndMortyResponse,
+    DOMloaded: false as Boolean,
+    singleCharacter: {} as Character,
+    singleCharacterID: "" as string,
+    currentPaginationPage: 1 as number,
     disableDownloadBtn: false,
-    allCharactersId: {},
-    RequestCharactersId: [],
+    allCharactersId: {} as Record<number, Character>,
+    RequestCharactersId: [] as number[],
   },
   // тут мы не пишем state.characters.characters так как characters что в индексе при конфиг сторе он глобальный
   // а тут это слайс про глобальный ничего не знает тут только characters что тут есть
   reducers: {
-    // : PayloadAction
-    addTodo(state, action) {
-      state.characters2.push(action.payload);
-    },
+
     setDOMLoaded(state, action) {
       state.DOMloaded = false;
     },
-    addSingleCharacter(state, action) {
+    addSingleCharacter(state, action: PayloadAction<Character>) {
       // state.singleCharacter = action.payload;
       const { data, payload } = action.payload;
       state.singleCharacter = payload;
@@ -111,7 +118,8 @@ const secondStoreSlice = createSlice({
       // console.log("action.payload at store for singleCharacter:", action.payload)
       // console.log("state.singleCharacter at store for singleCharacter:", state.singleCharacter)
     },
-    addCharacters(state, action) {
+   
+    addCharacters(state, action: PayloadAction<RickAndMortyResponse>) {
       // console.log("it is  addCharacters")
       // state.singleCharacter = action.payload;
       // const { data, payload } = action.payload;
@@ -132,7 +140,7 @@ const secondStoreSlice = createSlice({
 
       // console.log("payload at add character:", payload);
     },
-    setSingleCharacterID(state, action) {
+    setSingleCharacterID(state, action: PayloadAction<string>) {
       const { data, payload } = action.payload;
       // state.singleCharacterID = payload;
       state.singleCharacterID = action.payload;
@@ -141,7 +149,7 @@ const secondStoreSlice = createSlice({
       // console.log("action.payload at store for singleCharacter:", action.payload)
       // console.log("state.singleCharacterID at store for singleCharacter:", state.singleCharacterID)
     },
-    setCurrentPaginationPage(state, action) {
+    setCurrentPaginationPage(state, action: PayloadAction<number>) {
       // const { data, payload } = action.payload;
 
       // state.singleCharacterID = payload;
@@ -152,7 +160,7 @@ const secondStoreSlice = createSlice({
       // );
       // console.log(" payload at store destruct:",  payload)
     },
-    setDisableDownloadBtn(state, action) {
+    setDisableDownloadBtn(state, action: PayloadAction<boolean>) {
       const { data, payload } = action.payload;
       // state.singleCharacterID = payload;
       state.disableDownloadBtn = action.payload;
@@ -181,7 +189,7 @@ const secondStoreSlice = createSlice({
 
 // тут надо указывать название функции чтобы ее было видно в санке в этом же файле
 export const {
-  addTodo,
+
   setDOMLoaded,
   addSingleCharacter,
   addCharacters,
