@@ -1,0 +1,64 @@
+.appModal {
+  // display: flex;
+  // position: absolute;
+  // top: 0;
+  // width: 100vw;
+  // height: 100vh;
+  // background-color: rgba(0, 0, 0, 0.8);
+  // justify-content: center;
+  // align-items: center;
+
+  // position: fixed;
+  // inset: 0;
+  // z-index: 1000;
+  // overflow: auto;
+  // outline: 0;
+  // background-color: rgba(0, 0, 0, 0.8);
+
+  // тут везде будет проблема с сафари
+  @media (max-width: 991px) {
+    width: 100% !important;
+    height: 100%;
+  }
+
+  &__body {
+    // display: flex;
+    // transform: translateY(-50%);
+    // height: auto;
+    // display: flex;
+    // align-items: flex-start;
+    // gap: 28px;
+  }
+
+  &__mask {
+    background: gold;
+  }
+
+  &__header {
+    background: pink;
+  }
+
+  &__content {
+    background-color: green;
+  }
+
+  &__footer {
+    background-color: red;
+  }
+
+  // &__wrap {
+  //   width: auto;
+  //   height: 284px;
+  // }
+
+  &__wrap {
+    display: flex;
+    // gap: 28px;
+    gap: 16px;
+    align-items: flex-start;
+    // height: 284px;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding: 16px 0;
+  }
+}

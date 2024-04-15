@@ -1,0 +1,206 @@
+.card {
+  font-family: "Roboto", sans-serif;
+  display: flex;
+  height: 100%;
+  // max-width: 600px;
+  // width: 600px;
+  // width: 100%;
+  background-color: #3c3e44;
+  gap: 24px;
+  border-radius: 9px;
+  overflow: hidden;
+  // margin-bottom: 48px;
+  // max-width: 1550px;
+
+  // justify-content: space-between;
+
+  // border-radius: 9px;
+  // overflow: hidden;
+  // background-color: red;
+
+  // &:global() {
+
+  // }
+
+  // так работает
+  // [class~="card__body"] {
+  //   background-color: #9e9e9e;
+  //   width: 100%;
+  // }
+
+  @media (max-width: 1340px) {
+    // width: 500px;
+    // ! не помогает убрать прыжок футера пока нет карточки
+    // min-height: 570px;
+  }
+
+  // @media (max-width: 1120px) {
+  //   width: 440px;
+  // }
+
+  // @media (max-width: 991px) {
+  //   width: 500px;
+  // }
+
+  // @media (max-width: 575px) {
+  //   width: 450px;
+  //   flex-direction: column;
+  // }
+
+  // @media (max-width: 500px) {
+  //   width: 100%;
+  // }
+  @media (max-width: 1200px) {
+    gap: 0;
+    height: auto;
+    // min-height: 500px;
+  }
+
+  @media (max-width: 991px) {
+    flex-direction: column;
+  }
+
+  &__container-img {
+    // width: 100%;
+    // min-width: 230px;
+    // width: 600px;
+    // height: 600px;
+    // width: 570px;
+    height: 570px;
+    min-width: 595px;
+    // flex-basis: 50%;
+    // flex-basis: 50%;
+    // flex-basis: 60%;
+    // flex-shrink: 0;
+
+    @media (max-width: 1200px) {
+      // width: 400px;
+      // height: 400px;
+      // width: 450px;
+      // height: 450px;
+      // flex: 1 0 auto;
+      min-width: auto;
+      width: auto;
+      height: auto;
+      flex-shrink: 0;
+      flex-basis: 50%;
+    }
+
+    @media (max-width: 575px) {
+      // min-width: 170px;
+    }
+  }
+
+  &__img {
+    // height: 220px;
+    // max-width: 100%;
+    object-fit: cover;
+    width: 100%;
+
+    height: 100%;
+    // border-radius: 9px 0 0 9px;
+    // height: 100%;
+    @media (max-width: 1200px) {
+      // width: 100%;
+    }
+
+    // @media (max-width: 991px) {
+    //   width: 100%;
+    // }
+
+    @media (max-width: 575px) {
+      // max-height: 300px;
+      width: 100%;
+      display: block;
+      // border-radius: 9px 9px 0 0;
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    // background-color: #3c3e44;
+    width: 100%;
+    padding: 16px;
+    // border-radius: 0 9px 9px 0;
+
+    @media (max-width: 991px) {
+      width: auto;
+      // border-radius: 0 0 9px 9px;
+    }
+  }
+
+  &__title {
+    margin: 0;
+    color: #f5f5f5;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.1;
+
+    @media (max-width: 575px) {
+      font-size: 20px;
+    }
+  }
+
+  &__status {
+    color: #fff;
+
+    font-size: 16px;
+
+    font-weight: 500;
+    line-height: 26px;
+    text-transform: capitalize;
+
+    &-block {
+      display: flex;
+      gap: 7px;
+      align-items: center;
+    }
+  }
+
+  &__indicator {
+    // display: inline-block;
+    // margin-right: 7px;
+    height: 9px;
+    width: 9px;
+    background-color: #9e9e9e;
+    border-radius: 50%;
+
+    &--alive {
+      background-color: #55cc44;
+    }
+
+    &--dead {
+      background-color: #d63d2e;
+    }
+  }
+
+  &__subTitle {
+    margin: 0;
+    color: #9e9e9e;
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 26px;
+  }
+
+  &__info {
+    margin: 0;
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 29px;
+    color: #f5f5f5;
+  }
+
+  &__wrap {
+    // display: flex;
+    // flex-direction: column;
+    // align-items: flex-start;
+  }
+
+  &__inner {
+    display: flex;
+    gap: 4px;
+  }
+}

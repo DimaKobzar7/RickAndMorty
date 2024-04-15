@@ -1,0 +1,99 @@
+{
+  "characters": {
+    "info": {
+      "count": 107,
+      "pages": 6,
+      "prev": null,
+      "next": 2
+    },
+    "results": [
+      {
+        "id": "1",
+        "name": "Rick Sanchez"
+      },
+      {
+        "id": "8",
+        "name": "Adjudicator Rick"
+      }
+    ]
+  },
+  "locations": {
+    "info": {
+      "count": 17,
+      "pages": 1,
+      "prev": null,
+      "next": null
+    },
+    "results": [
+      {
+        "name": "Rick's Battery Microverse",
+        "residents": [
+          {
+            "name": "Chris",
+            "id": "65"
+          },
+          {
+            "name": "Zeep Xanflorp",
+            "id": "388"
+          }
+        ]
+      },
+      {
+        "name": "The Menagerie",
+        "residents": [
+          {
+            "name": "Collector",
+            "id": "67"
+          },
+          {
+            "name": "Chang",
+            "id": "490"
+          }
+        ]
+      },
+
+      {
+        "name": "Eric Stoltz Mask Earth",
+        "residents": []
+      }
+    ]
+  },
+  "episodes": {
+    "info": {
+      "count": 15,
+      "pages": 1,
+      "prev": null,
+      "next": null
+    },
+    "results": [
+      {
+        "name": "Close Rick-counters of the Rick Kind",
+        "episode": "S01E10",
+        "characters": [
+          {
+            "name": "Robot Rick",
+            "id": "299"
+          },
+          {
+            "name": "Snuffles (Snowball)",
+            "id": "329"
+          }
+        ]
+      },
+      {
+        "name": "The Ricks Must Be Crazy",
+        "episode": "S02E06",
+        "characters": [
+          {
+            "name": "Rick Sanchez",
+            "id": "1"
+          },
+          {
+            "name": "Morty Smith",
+            "id": "2"
+          }
+        ]
+      }
+    ]
+  }
+}

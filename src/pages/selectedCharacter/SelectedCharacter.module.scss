@@ -1,0 +1,22 @@
+.selectedCharacter {
+  padding: 80px 0 56px;
+  flex: 1;
+  background-color: #272b33;
+
+  // тест чтобы футер не прыгал пока нет карточки
+  // ! работает!!!
+  // но надо настроить под все разрешения
+  min-height: 570px;
+
+  @media (max-width: 1340px) {
+    padding: 56px 0 48px;
+  }
+
+  @media (max-width: 991px) {
+    padding: 48px 0 24px;
+  }
+
+  @media (max-width: 575px) {
+    padding: 16px 0;
+  }
+}

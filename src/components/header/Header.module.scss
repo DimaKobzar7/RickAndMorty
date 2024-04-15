@@ -1,0 +1,64 @@
+.header {
+  &__title {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0;
+
+    color: #202329;
+    font-family: "Roboto", sans-serif;
+    font-size: 101px;
+    font-weight: 700;
+    line-height: 1.1;
+    width: 100%;
+    max-width: 95%;
+    text-align: center;
+
+    // можно все это в миксины упаковать
+    @media (max-width: 991px) {
+      font-size: 80px;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 56px;
+    }
+  }
+
+  &__wrap {
+    position: relative;
+  }
+
+  &__ico {
+    padding-top: 10px;
+
+    @media (max-width: 576px) {
+      width: 30px;
+      height: 30px;
+    }
+  }
+
+  &__banner {
+    display: block;
+    margin: 0 auto;
+
+    @media (max-width: 991px) {
+      width: 250px;
+      height: 250px;
+    }
+
+    @media (max-width: 576px) {
+      width: 200px;
+      height: 200px;
+    }
+  }
+
+  // // GSAP TESTS
+  .word {
+    display: inline-block;
+  }
+
+  .letter {
+    display: inline-block;
+  }
+}

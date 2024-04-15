@@ -1,0 +1,48 @@
+.selectInputs {
+  // max-width: 260px;
+  min-width: 260px;
+  // font-family: "Roboto", sans-serif;
+  // background-color: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  border-radius: 4px;
+  overflow: hidden;
+
+  @media (max-width: 991px) {
+    width: 100%;
+  }
+
+  &--default {
+    border-radius: 4px 4px 0 0;
+  }
+
+  &__input {
+    padding: 16px 12px;
+    background-color: #f5f5f5;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: 1.5;
+    color: #272b33;
+    letter-spacing: 0.5px;
+    appearance: none;
+    outline: none;
+    border: none;
+
+    &::placeholder {
+      font-size: 16px;
+
+      font-weight: 400;
+      color: #272b33;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+    }
+
+    &:not(:last-child) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+      // background-color: red;
+    }
+  }
+}

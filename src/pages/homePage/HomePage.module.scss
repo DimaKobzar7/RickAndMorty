@@ -1,0 +1,30 @@
+.homePage {
+  // flex: 1;
+  background-color: #272b33;
+  // background-color: red;
+  // height: 100%;
+  flex: 1 1 auto;
+  // такой вариант прибивает футер к низу но он никогда не будет в зоне видимости пока мы не проскролим вниз
+  // min-height: calc(100vh - 392px);
+  padding: 24px 0 56px;
+
+  @media (max-width: 1340px) {
+    padding: 24px 0 48px;
+  }
+
+  @media (max-width: 991px) {
+    padding: 24px 0;
+  }
+
+  @media (max-width: 575px) {
+    padding: 16px 0;
+  }
+
+  &__cards {
+    display: flex;
+    justify-content: center;
+    gap: 27px;
+    flex-wrap: wrap;
+    // height: 100%;
+  }
+}
