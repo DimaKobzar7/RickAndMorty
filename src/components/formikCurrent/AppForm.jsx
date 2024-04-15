@@ -238,7 +238,8 @@ const AppForm = () => {
 
     setSearchParams(`page=${page}`);
     // setSearchParams("page=1");
-    dispatch(addCharacters(cardData));
+    // dispatch(addCharacters(cardData));
+    dispatch(addCharacters(cardData.payload.data.characters));
   };
 
   function areObjectsEqual(obj1, obj2) {
@@ -281,43 +282,6 @@ const AppForm = () => {
       (item) => Boolean(item) === false
     );
 
-    // ! working old two IF
-    // if (areObjectsEqual(localStorageData, filterRequestData)) {
-    //   console.log("obj is equel so return");
-    //   // если локал сторедж и стор с запросом одинаковый то удалять локал сторедж (НЕ ПЕРЕЗАПИСАТЬ А УДАЛИТЬ!)
-    //   // но такая штука создает возможность клаацать на кнопку и кучу запросов делать из за того что на клик по кнопке создается по новой стор
-    //   // localStorage.removeItem("userSearchQuery");
-    //   return;
-    // }
-
-    // if (
-    //   !localStorageData &&
-    //   // Object.values(filterRequestData).every((item) => Boolean(item) === false)
-    //   allFilterRequestDataIsEmpty
-    // ) {
-    //   console.log("localStorageData in IF so return:", localStorageData);
-
-    //   return;
-    // } else {
-    //   console.log("ELSE:");
-    //   // localStorage.setItem(
-    //   //   "userSearchQuery",
-    //   //   JSON.stringify(filterRequestData)
-    //   // );
-
-    //   // for (const key in filterRequestData) {
-    //   //   // console.log("key:", key);
-    //   //   if (filterRequestData["characterName"] === "") {
-    //   //     console.log('filterRequestData["characterName"] === ""');
-    //   //     localStorage.setItem(
-    //   //       "userSearchQuery",
-    //   //       JSON.stringify({ ...filterRequestData, characterName: "" })
-    //   //     );
-    //   //   }
-    //   // }
-    // }
-
-    // ! combo IF and looks like it work
     if (
       areObjectsEqual(localStorageData, filterRequestData) ||
       (!localStorageData && allFilterRequestDataIsEmpty)
@@ -334,6 +298,11 @@ const AppForm = () => {
     // console.log("gg");
 
     dispatch(setModalIsOpen(false));
+
+    // console.log(
+    //   "filterRequestData.characterName, gggggg:",
+    //   filterRequestData.characterName
+    // );
 
     getCardInfo(
       1,
