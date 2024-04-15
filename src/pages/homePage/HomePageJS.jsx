@@ -20,9 +20,7 @@ import { Col, Flex, Pagination, Row } from "antd";
 import {
   addCharacters,
   fetchCharacters,
-  // setAllCharactersId,
   setCurrentPaginationPage,
-  // setRequestCharactersId,
 } from "../../store/secondStore";
 import AppPagination from "../../components/appPagination/AppPagination";
 import { useSearchParams } from "react-router-dom";

@@ -159,30 +159,7 @@ const secondStoreSlice = createSlice({
       // console.log("action.payload:", action.payload)
       // console.log(" payload at store destruct:",  payload)
     },
-    setAllCharactersId(state, action) {
-      const { payload } = action.payload;
-      // const { data, payload } = action.payload;
-      console.log("action.payload at  setAllCharactersId:", action.payload);
-      // console.log(
-      //   " payload at store destruct at  setAllCharactersId:",
-      //   payload
-      // );
-      // state.singleCharacterID = payload;
-      // state.allCharactersId = action.payload;
-      // Так тоже работает но неясно откуда столько пейлоудов
-      // state.allCharactersId = action.payload.payload.data;
-      // так работает
-      state.allCharactersId = payload.data;
-    },
-    setRequestCharactersId(state, action) {
-      const { data, payload } = action.payload;
-      // state.RequestCharactersId = action.payload;
-      console.log("action.payload at setRequestCharactersId:", action.payload);
-      // console.log(" payload at store destruct:",  payload)
-      // такая запись позволяет сразу брать и перебирать массив без вложеностей
-      state.characters2 = payload.data.charactersByIds;
-      // state.characters2 = payload.data;
-    },
+  
   },
   extraReducers: (builder) => {
     builder.addCase(fetchCharacters.fulfilled, (state, action) => {
@@ -212,8 +189,6 @@ export const {
   setCurrentPaginationPage,
   setDisableDownloadBtn,
   // characters2,
-  setAllCharactersId,
-  setRequestCharactersId,
 } = secondStoreSlice.actions;
 
 export default secondStoreSlice.reducer;
