@@ -7,6 +7,7 @@ import FloatActionBtn from "./components/floatActionBtn/FloatActionBtn";
 // import { Button, ConfigProvider, Drawer } from "antd";
 import AppDrawer from "./components/appDrawer/AppDrawer";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector } from './hooks/hooks';
 
 const App = () => {
   
@@ -14,11 +15,13 @@ const App = () => {
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const disableDownloadBtn = useSelector(
+  const disableDownloadBtn = useAppSelector(
     (state) => state.secondTest.disableDownloadBtn
   );
 
-  const test2 = useSelector((state) => state.secondTest.characters2);
+ 
+  // const test2 = useSelector((state) => state.secondTest.characters2);
+  const test2 =  useAppSelector((state) => state.secondTest.characters2);
 
   const showDrawer = () => {
     console.log("history open");
