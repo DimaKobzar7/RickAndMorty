@@ -20,7 +20,7 @@ interface Character {
   };
   image: string;
   episode: string[];
-  created: string;
+  created?: string;
 }
 
 // Определение типов для информации о страницах
@@ -112,6 +112,7 @@ const secondStoreSlice = createSlice({
     addSingleCharacter(state, action: PayloadAction<Character>) {
       // state.singleCharacter = action.payload;
       // const { data, payload } = action.payload;
+      //! не хочет работать без детруктуризации тут надо разобратся
       const { payload } = action.payload;
       state.singleCharacter = payload;
       // state.singleCharacter = action.payload;
