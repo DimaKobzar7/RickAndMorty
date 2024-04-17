@@ -7,7 +7,16 @@ import tipsStyles from "./Tips.module.scss";
 // ! стили мобилы поломаны
 // //! миксины не работают
 //  ! надо делать 1 айтем и туда по массиву загонять и общие стили кинуть в форму а не тут 4 цикла
-const Tips = ({ title, status, species, types, gender }) => {
+
+interface TipsProps {
+  title: string;
+  status: string[];
+  species: string[];
+  types: string[];
+  gender: string[];
+}
+
+const Tips: React.FC<TipsProps> = ({ title, status, species, types, gender }) => {
   return (
     <div className={tipsStyles["tips"]}>
       <h2 className={tipsStyles["tips__title"]}>{title}</h2>
