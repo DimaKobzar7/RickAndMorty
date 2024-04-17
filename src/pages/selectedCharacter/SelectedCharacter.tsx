@@ -12,17 +12,21 @@ import { useDispatch, useSelector } from "react-redux";
 import BigCard from "../../components/bigCard/BigCard";
 import AppContainer from "../../components/container/Container";
 import FloatActionBtn from "../../components/floatActionBtn/FloatActionBtn";
+// import {useAppSelector} from '../../hooks/hooks.ts'
 
 import selectedCharacterStyles from "./SelectedCharacter.module.scss";
 import { Col, Row } from "antd";
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-const SelectedCharacterJSX = () => {
-  const test2 = useSelector((state) => state.secondTest.characters2);
-  const reduxDOMloaded = useSelector((state) => state.secondTest.DOMloaded);
-  const singleCharacter = useSelector(
+const SelectedCharacterJSX: React.FC = () => {
+  
+  
+  const test2 = useAppSelector((state) => state.secondTest.characters2);
+  const reduxDOMloaded = useAppSelector((state) => state.secondTest.DOMloaded);
+  const singleCharacter = useAppSelector(
     (state) => state.secondTest.singleCharacter
   );
-  const singleCharacterID = useSelector(
+  const singleCharacterID = useAppSelector(
     (state) => state.secondTest.singleCharacterID
   );
 
@@ -30,9 +34,9 @@ const SelectedCharacterJSX = () => {
   //   (state) => state.secondTest.disableDownloadBtn
   // );
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   // надо сделать чтобы кидало в самый вверх при заходе на страницу
   useEffect(() => {
     // console.log("character");
@@ -42,7 +46,8 @@ const SelectedCharacterJSX = () => {
     const getCardInfo = async () => {
       // console.log("singleCharacterID at get card info:", singleCharacterID);
       // console.log("id:", id);
-      if (id !== singleCharacterID) {
+      // !добавил id &&
+      if (id && id !== singleCharacterID) {
         dispatch(setSingleCharacterID(id));
       }
       if (id !== singleCharacterID) {
@@ -70,6 +75,7 @@ const SelectedCharacterJSX = () => {
                 }
               }
             }`,
+            filter: ''
           })
         );
 
@@ -94,12 +100,6 @@ const SelectedCharacterJSX = () => {
 
     dispatch(setDisableDownloadBtn(true));
 
-    // нормальные данные но тайпскрипт в апе ругается
-    // а ругается потому что их изначально нет они с сервнра нне пришли
-    // елвис операторами это фиксил но в тайпскрипте это не катит
-    // const results = test2.data?.characters?.results;
-    // console.log("results at download:", results);
-
     window.scrollTo({
       top: 0,
       // left: 100,
@@ -107,7 +107,7 @@ const SelectedCharacterJSX = () => {
     });
 
     return () => {
-      dispatch(setDOMLoaded());
+      // dispatch(setDOMLoaded());
       console.log("reduxDOMloaded leave character page:", reduxDOMloaded);
       dispatch(setDisableDownloadBtn(false));
     };
@@ -126,13 +126,7 @@ const SelectedCharacterJSX = () => {
 
   return (
     <div className={selectedCharacterStyles["selectedCharacter"]}>
-      {/* <h1>Selected Character page</h1> */}
-
-      {/* <Link to='/'>Home</Link> */}
-
-      {/* {reduxDOMloaded && <div>{test2.data?.character?.name}</div>} */}
-      {/* <div>{test2.data?.character?.name}</div> */}
-      {/* <AppContainer><AppCard content={test2} /></AppContainer> */}
+    
       <AppContainer>
         {/* <BigCard content={singleCharacter} /> */}
         <Row justify='center'>
@@ -144,13 +138,7 @@ const SelectedCharacterJSX = () => {
         </Row>
       </AppContainer>
 
-      {/* <br />
-      <Link to='/testPage'>testPage</Link>
-      <br />
-      <Link to='/testPageApollo'>testPageApollo</Link>
-      <br />
-      <Link to='/testPageRedux'>testPageRedux</Link> */}
-      {/* <FloatActionBtn /> */}
+      
     </div>
   );
 };
