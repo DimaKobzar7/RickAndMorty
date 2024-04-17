@@ -57,16 +57,6 @@ const HomePageJS = () => {
 
   const dispatch = useDispatch();
 
-  const cardsWrap = useRef();
-  const cards = useRef([]);
-  const titleCardAnimation = useRef([]);
-  const scrollTitleAnimation = useRef(null);
-  const textTimeline = useRef(null);
-  const animation1 = useRef(null);
-  const animation2 = useRef(null);
-  const animation3 = useRef(null);
-  const cards2 = useRef(null);
-
   const getCardInfo = async (
     page,
     // changePage,
@@ -172,16 +162,9 @@ const HomePageJS = () => {
     console.log("test2 at home before req:", test2);
   }, []);
 
-  // useEffect(() => {
-  //   console.log(
-  //     "filterIsOpen at home at use effect with dependtnse [filterIsOpen]:",
-  //     filterIsOpen
-  //   );
-  // }, [filterIsOpen]);
-
   useEffect(() => {
     console.log("test2 at home at use effect with dependtnse:", test2);
-    console.log(" cards.current at test2 useEffect:", cards.current);
+    // console.log(" cards.current at test2 useEffect:", cards.current);
   }, [test2]);
 
   useEffect(() => {
@@ -219,156 +202,6 @@ const HomePageJS = () => {
     console.log("gg pagination");
     // ! при клике на пагинацию убиваем анимацию и запускаем ее когда есть window.scrollY === 0 (тест)
     // ! анимация не убивается даже когда тест е меняется!!!
-    console.log(
-      " scrollTitleAnimation.current before kill:",
-      scrollTitleAnimation.current
-    );
-
-    // dispatch(addCharacters({ data: { characters: "gg" } }));
-    // dispatch(addCharacters({ data: { characters: {} } }));
-    // dispatch(addCharacters({ payload: { data: { characters: [] } } }));
-    // dispatch(
-    //   addCharacters({ payload: { data: { characters: { results: [] } } } })
-    // );
-
-    // dispatch(addCharacters({ characters: {} }));
-
-    // titleCardAnimation.current.forEach((title, index) => {
-    //   // console.log("card:", card);
-    //   // console.log("titleCardAnimation:", titleCardAnimation);
-    //   // console.log("titleCardAnimation.current:", titleCardAnimation.current);
-    //   // console.log("title at media at for each:", title);
-
-    //   // && window.scrollY === 0
-    //   if (title) {
-    //     scrollTitleAnimation.current = gsap.to(title, {
-    //       duration: 3,
-
-    //       scrollTrigger: {
-    //         markers: true,
-
-    //         trigger: title,
-    //         // trigger: cardsWrap.current,
-    //         toggleActions: "play none none reset",
-    //         onEnter: () => {
-    //           console.log("onEnter");
-    //           animation1.current = gsap.to(title, {
-    //             duration: 1,
-    //             delay: 1,
-
-    //             text: {
-    //               value: "Click on me!",
-    //             },
-    //             color: "rgb(255, 152, 0)",
-    //           });
-
-    //           animation3.current = gsap.to(title, {
-    //             duration: 1,
-    //             delay: 3,
-    //             text: {
-    //               value: () => test2.results[index].name,
-    //             },
-    //             color: "#f5f5f5",
-    //           });
-    //         },
-
-    //         onEnterBack: () => {
-    //           console.log("onEnterBack");
-    //           animation1.current = gsap.to(title, {
-    //             duration: 1,
-    //             delay: 1,
-
-    //             text: {
-    //               value: "Click on me!",
-    //             },
-    //             color: "rgb(255, 152, 0)",
-    //           });
-
-    //           animation3.current = gsap.to(title, {
-    //             duration: 1,
-    //             delay: 3,
-    //             text: {
-    //               value: () => test2.results[index].name,
-    //             },
-    //             color: "#f5f5f5",
-    //           });
-    //         },
-    //         onLeave: () => {
-    //           console.log("onLeave");
-    //           animation2.current = gsap.to(title, {
-    //             duration: 1,
-    //             delay: 2,
-    //             text: {
-    //               value: () => test2.results[index].name,
-    //             },
-    //             color: "#f5f5f5",
-    //           });
-    //         },
-    //         onLeaveBack: () => {
-    //           console.log("onLeaveBack");
-    //           // console.log("test2.results[index]:", test2.results[index]);
-    //           animation2.current = gsap.to(title, {
-    //             duration: 1,
-    //             delay: 2,
-    //             text: {
-    //               value: () => test2.results[index].name,
-    //             },
-    //             color: "#f5f5f5",
-    //           });
-    //         },
-    //       },
-    //     });
-    //     // scrollAnimation.kill();
-    //   }
-    // });
-    // анимации даже так не убиваются
-    // setTimeout(() => {
-    //   scrollTitleAnimation.current.kill();
-    //   animation1.current.kill();
-    //   animation2.current.kill();
-    //   animation3.current.kill();
-    //   scrollTitleAnimation.current = null;
-    //   animation1.current = null;
-    //   animation2.current = null;
-    //   animation3.current = null;
-    //   titleCardAnimation.current = [];
-    // }, 4000);
-
-    // scrollTitleAnimation.current.kill();
-    // animation1.current.kill();
-    // animation2.current.kill();
-    // animation3.current.kill();
-    // scrollTitleAnimation.current = null;
-    // animation1.current = null;
-    // animation2.current = null;
-    // animation3.current = null;
-    // titleCardAnimation.current = [];
-    // cardsWrap.current = null;
-    // cards.current = [];
-
-    // cards2.current.kill();
-    console.log(
-      " scrollTitleAnimation.current after kill:",
-      scrollTitleAnimation.current
-    );
-
-    // dispatch(addCharacters({}));
-    // const cardData = dispatch(
-    //   fetchCharacters(charactersRequest(page, "", "", "", "", ""))
-    // );
-
-    // const test2 = useSelector((state) => state.secondTest.characters2);
-
-    // dispatch(addCharacters('data': {}));
-    // !конец теста этого
-    // GSAP TEST
-
-    // if (page === 1) {
-    //   return;
-    // }
-    // console.log("pagination");
-
-    // console.log("page at pagination func:", page);
 
     setSearchParams(`page=${page}`);
     getCardInfo(
@@ -381,13 +214,6 @@ const HomePageJS = () => {
     );
 
     // setSearchParams(`page=${page}`);
-
-    // сносит в 0 то есть работает как надо но если ставить до получения карточек то анимация ломалась как и ломается
-    // dispatch(
-    //   addCharacters({ payload: { data: { characters: { results: [] } } } })
-    // );
-    // cards.current = [];
-    // titleCardAnimation.current = [];
 
     // не уверен что надо после каждого клика подымать вверх
     // чтобы увидеть все с начала то хорошо но если пользователь просто хочет прокликать до определенной страниц то это будет бесить
@@ -403,17 +229,6 @@ const HomePageJS = () => {
       "filterIsOpen at home at use effect with dependtnse [filterIsOpen]!!!!!ПП!!!:",
       filterIsOpen
     );
-
-    // console.log(
-    //   "titleCardAnimation.current at filter useEffect:",
-    //   titleCardAnimation.current
-    // );
-    // cardsTitleAnimationTabsAndMob({
-    //   // dependencies: test2,
-    //   // scope: cardsWrap.current,
-    //   selectors: titleCardAnimation.current,
-    //   titleText: test2.results,
-    // });
   }, [filterIsOpen]);
 
   return (
@@ -426,7 +241,6 @@ const HomePageJS = () => {
             test2.results.map((data, index) => {
               return (
                 <SmallCard
-                  ref={(el) => (cards.current[index] = el)}
                   index={index}
                   key={data.id}
                   image={data.image}
@@ -436,7 +250,6 @@ const HomePageJS = () => {
                   species={data.species}
                   location={data.location}
                   episode={data.episode}
-                  cardTitle={(el) => (titleCardAnimation.current[index] = el)}
                 />
               );
             })}
