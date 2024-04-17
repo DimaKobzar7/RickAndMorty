@@ -5,9 +5,9 @@ import headerStyles from "./Header.module.scss";
 import AppContainer from "../container/Container";
 import { Link } from "react-router-dom";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, FC } from "react";
 
-const Header = () => {
+const Header: FC = () => {
   const splitTextRef = useRef(null); // Ref for the split text container
 
   return (
