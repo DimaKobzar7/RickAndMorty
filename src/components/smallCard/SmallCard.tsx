@@ -13,8 +13,6 @@ import {
   FloatButton,
 } from "antd";
 
-import { useRef } from "react";
-
 // Register ScrollTrigger with GSAP
 
 // import Meta from "antd/es/card/Meta";
