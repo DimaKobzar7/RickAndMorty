@@ -88,7 +88,7 @@ const formStoreSlice = createSlice({
       }
     },
 
-    clearFilterRequest(state, action) {
+    clearFilterRequest(state) {
       // !это старое
       // state.filterRequestData = {
       //   characterName: "",

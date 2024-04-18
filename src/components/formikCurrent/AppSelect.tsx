@@ -6,10 +6,17 @@ import classnames from "classnames";
 import selectStyles from "./AppSelect.module.scss";
 // import { setFilterRequest, setCharacter } from "../../store/formStore";
 // import { useField, useFormikContext } from "formik";
+interface Props {
+  filterCategory: string[];
+  isModalOpen: boolean;
+  openSelect: () => void;
+}
+
 
 // вроде удалось игнорить лейбл но брать данные с инпута и нажимать на лейбл
 // { ...props }
-const AppSelect = (props) => {
+// ! в этом компоненте нет смысла так как это просто кнопка он уже не еть селектом
+const AppSelect: React.FC<Props> = (props) => {
   return (
     <div className={selectStyles["select"]}>
       <div
@@ -47,17 +54,7 @@ const AppSelect = (props) => {
           <div className={selectStyles["select__item"]} key={item}>
             <label className={selectStyles["select__label"]} htmlFor={item}>
               {item}
-              {/*   className={selectStyles["select__customCheckbox"]} */}
-
-              {/*  className={classnames(selectStyles["select__customCheckbox"], {
-                  [selectStyles["select__checkbox-active"]]: Object.values(
-                    props.filterRequest
-                  ).includes(item.toLowerCase()),
-                })} */}
-              <div></div>
             </label>
-
-            {/* onChange={(e) => props.handleOptionClick(e, item)} */}
             <input
               className={selectStyles["select__input"]}
               type='checkbox'
