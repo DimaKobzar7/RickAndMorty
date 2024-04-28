@@ -16,6 +16,12 @@ import homePageStyles from "./HomePage.module.scss";
 import { Col, Flex, Pagination, Row } from "antd";
 
 // тут нет useLayoutEffect
+// //! можно юз мемо на карточки поставить попробовать?
+// По умолчанию, когда компонент перерисовывается, React рекурсивно перерисовывает все его дочерние элементы.
+//  Вот почему, когда TodoList выполняет повторную визуализацию с использованием другой темы, компонент List также перерисовывается.
+//! это можно попробовать для взаимодействия с локал стором useSyncExternalStore(subscribe, getSnapshot, getServerSnapshot?)
+// ! memo(Component, arePropsEqual?) можно ставить на весь компонент чтобы он не рендерился если у него ничего не меняется
+// ! и такое можно сделать для загрузки компонента const SomeComponent = lazy(load)
 
 import {
   addCharacters,
@@ -31,42 +37,45 @@ import AppForm from "../../components/formikCurrent/AppForm";
 import cardStyles from "../../components/smallCard/SmallCard.module.scss";
 import { charactersRequest } from "../../api";
 import { setFilterIsOpen, setFilterRequestData } from "../../store/formStore";
+import { useAppSelector } from '../../hooks/hooks';
 // import { useGetCardInfo } from "../../hooks/useGetCardInfo";
 
 // import cardStyles from "./SmallCard.module.scss";
 
-const HomePageJS = () => {
+// ! надо сделать чтобы при возврате назад на текущей странице не летел запрос на все карточки маленькие
+const HomePageJS: React.FC  = () => {
   // изменение места не исправило ошибку что происходит при изменении экрана
   // gsap.registerPlugin(ScrollTrigger);
   // gsap.registerPlugin(TextPlugin);
 
   // const test = useSelector((state) => state.characters.characters);
-  const test2 = useSelector((state) => state.secondTest.characters2);
+  const test2 = useAppSelector((state) => state.secondTest.characters2);
 
-  const currentPaginationPage = useSelector(
+  const currentPaginationPage = useAppSelector(
     (state) => state.secondTest.currentPaginationPage
   );
 
-  const filterRequestData = useSelector(
+  const filterRequestData = useAppSelector(
     (state) => state.formStore.filterRequestData
   );
 
-  const filterIsOpen = useSelector((state) => state.formStore.filterIsOpen);
+  const filterIsOpen = useAppSelector((state) => state.formStore.filterIsOpen);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useDispatch();
 
+  //! тут обычно летит строка из урлы но из пагинации летит цифра
   const getCardInfo = async (
-    page,
-    // changePage,
-    characterName,
-    characterStatus,
-    characterSpecies,
-    characterType,
-    characterGender
+    page: string | number = '1',
+    characterName?: string,
+    characterStatus?: string,
+    characterSpecies?: string,
+    characterType?: string,
+    characterGender?: string
   ) => {
-    // console.log("page at getCardInfo:", page);
+    // console.log("page at getCardInfo at homepagejs:", page);
+    console.log(" typeof page at getCardInfo at homepagejs:", typeof page);
 
     // await тут нужен
     const cardData = await dispatch(
@@ -112,11 +121,23 @@ const HomePageJS = () => {
       // если функция что ниже не работает то все ок ставит
       console.log("no page at home page useEffect[]!");
       setSearchParams("page=1");
+      
       console.log("searchParams at !searchParams.get('page'):", searchParams);
+
+      // !попытка кешрования 
+      dispatch(
+        setCurrentPaginationPage('1')
+        // setCurrentPaginationPage(1)
+      );
+    } else {
+      dispatch(
+        // setCurrentPaginationPage(+searchParams.get("page"))
+        setCurrentPaginationPage(searchParams.get("page"))
+      );
     }
 
     // после перезагрузки оно выполняет иф будто стор есть хоть его и нет поэтому и фильтр не исчезает
-    if (localStorageData) {
+    if (localStorageData ) {
       // это надо заталкать в редакс
       console.log(
         "storage is in home page JS:",
@@ -147,7 +168,20 @@ const HomePageJS = () => {
 
       // dispatch(setFilterIsOpen(false));
       // setSearchParams(`page=1`);
-      getCardInfo(searchParams.get("page"));
+      console.log('typeof searchParams.get("page") at:', typeof searchParams.get("page"))
+      const pageParam: string | null = searchParams.get("page");
+      
+      // getCardInfo(pageParam ? parseInt(pageParam) : 1);
+      // getCardInfo(searchParams.get("page"));
+
+      // !попытка кеширования
+      // ! успешная но надо это условие кудато переставить
+      if(currentPaginationPage !== searchParams.get("page")) {
+        // console.log('currentPaginationPage !== searchParams.get("page"):', currentPaginationPage !== searchParams.get("page"))
+        // console.log('searchParams.get("page") for cache:', searchParams.get("page"))
+        // console.log('currentPaginationPage for cache:', currentPaginationPage)
+        getCardInfo(pageParam ? parseInt(pageParam) : 1);
+      }
     }
 
     // закрываю фильтр если локал стора нет или там пустые поля. Просто это услови поставил ниже чтобы переменная с закрытием фильтра не конфликтовала с условием ниже
@@ -156,7 +190,16 @@ const HomePageJS = () => {
       localStorage.removeItem("userSearchQuery");
       dispatch(setFilterIsOpen(false));
 
-      getCardInfo(searchParams.get("page"));
+      console.log('typeof searchParams.get("page") at:', typeof searchParams.get("page"))
+      // if(Boolean(searchParams.get("page"))) {
+      //   getCardInfo(searchParams.get("page"));
+      // }
+
+      const pageParam: string | null = searchParams.get("page");
+      
+      getCardInfo(pageParam ? parseInt(pageParam) : 1);
+      // getCardInfo(searchParams.get("page"));
+    
     }
 
     console.log("test2 at home before req:", test2);
@@ -182,8 +225,12 @@ const HomePageJS = () => {
     });
 
     if (someTest && Object.values(test2).length === 0) {
+      // console.log('typeof searchParams.get("page") at .length === 0:', typeof searchParams.get("page"))
+      const pageParam: string | null = searchParams.get("page");
+
       getCardInfo(
-        searchParams.get("page"),
+        // searchParams.get("page"),
+        pageParam ? parseInt(pageParam) : 1,
         filterRequestData.characterName,
         filterRequestData.characterStatus,
         filterRequestData.characterSpecies,
@@ -197,13 +244,18 @@ const HomePageJS = () => {
   }, [filterRequestData]);
 
   // ! Если перезагружаешь то кидает базовые персонажи а не по фильтру
-  const pagination = (page) => {
+  const pagination = (page: number) => {
     // !Тест сброса карточек чтобы анимация нормально сработала
     console.log("gg pagination");
+    console.log("typeof pagination:", typeof page)
     // ! при клике на пагинацию убиваем анимацию и запускаем ее когда есть window.scrollY === 0 (тест)
     // ! анимация не убивается даже когда тест е меняется!!!
 
     setSearchParams(`page=${page}`);
+    dispatch(
+      setCurrentPaginationPage(String(page))
+      // setCurrentPaginationPage((page))
+    );
     getCardInfo(
       page,
       filterRequestData.characterName,

@@ -1,9 +1,10 @@
 // import { useQuery } from "@apollo/client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState,  Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   addSingleCharacter,
   fetchCharacters,
+
   setDOMLoaded,
   setDisableDownloadBtn,
   setSingleCharacterID,
@@ -30,71 +31,21 @@ const SelectedCharacterJSX: React.FC = () => {
     (state) => state.secondTest.singleCharacterID
   );
 
+
+
   // const disableDownloadBtn = useSelector(
   //   (state) => state.secondTest.disableDownloadBtn
   // );
 
   const dispatch = useAppDispatch();
 
-  const { id } = useParams<{ id: string }>();
+  // const { id } = useParams<{ id: string }>();
   // надо сделать чтобы кидало в самый вверх при заходе на страницу
   useEffect(() => {
     // console.log("character");
     // console.log("id:", id);
     console.log("reduxDOMloaded mount at select character:", reduxDOMloaded);
 
-    const getCardInfo = async () => {
-      // console.log("singleCharacterID at get card info:", singleCharacterID);
-      // console.log("id:", id);
-      // !добавил id &&
-      if (id && id !== singleCharacterID) {
-        dispatch(setSingleCharacterID(id));
-      }
-      if (id !== singleCharacterID) {
-        const cardData = await dispatch(
-          fetchCharacters({
-            req: `query SingleCharacter {
-              character(id: ${id}) {
-                name
-                status
-                species
-                gender
-                image
-                origin {
-                  name
-                  dimension
-                }
-                episode {
-                  name
-                  air_date
-                  episode
-                }
-                location {
-                  name
-                  dimension
-                }
-              }
-            }`,
-            filter: ''
-          })
-        );
-
-        // ! не видит нормально элемнты в пропсах большой карточки если делаешь cardData.payload.data.character
-        dispatch(addSingleCharacter(cardData));
-
-        // dispatch(addSingleCharacter(cardData.payload.data.character));
-        console.log("cardData at selectedCharacter:", cardData);
-      }
-
-      console.log(
-        "singleCharacter store at selectedCharacter:",
-        singleCharacter
-      );
-
-      // console.log("cardData data at async:", cardData);
-    };
-
-    getCardInfo();
 
     console.log("test2 at character:", test2);
 
@@ -132,7 +83,13 @@ const SelectedCharacterJSX: React.FC = () => {
         <Row justify='center'>
           <Col xs={1}></Col>
           <Col xs={22}>
-            <BigCard content={singleCharacter} />
+            {/* <BigCard content={singleCharacter} /> */}
+            {/* <BigCard content={testSingleCharacter} /> */}
+            <BigCard />
+            {/* <Suspense fallback={<h1>GG WP</h1>}>
+              <BigCard/>
+            </Suspense> */}
+            
           </Col>
           <Col xs={1}></Col>
         </Row>

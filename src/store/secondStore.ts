@@ -97,7 +97,8 @@ const secondStoreSlice = createSlice({
     DOMloaded: false as Boolean,
     singleCharacter: {} as Character,
     singleCharacterID: "" as string,
-    currentPaginationPage: 1 as number,
+    // currentPaginationPage: 1 as number,
+    currentPaginationPage: '' as string,
     disableDownloadBtn: false,
     allCharactersId: {} as Record<number, Character>,
     RequestCharactersId: [] as number[],
@@ -110,11 +111,12 @@ const secondStoreSlice = createSlice({
       state.DOMloaded = false;
     },
     addSingleCharacter(state, action: PayloadAction<Character>) {
-      // state.singleCharacter = action.payload;
+      state.singleCharacter = action.payload;
       // const { data, payload } = action.payload;
       //! не хочет работать без детруктуризации тут надо разобратся
+      // ! а нужен ли мне редакс тут для одного места на одной странице?
       const { payload } = action.payload;
-      state.singleCharacter = payload;
+      // state.singleCharacter = payload;
       // state.singleCharacter = action.payload;
       // console.log("data at store destruct at addSingleCharacter:", data) 
       console.log(" payload at store destruct at addSingleCharacter:",  payload)
@@ -165,6 +167,7 @@ const secondStoreSlice = createSlice({
       //   "action.payload at setCurrentPaginationPage:",
       //   action.payload
       // );
+      console.log("action.payload at store at setCurrentPaginationPage:", action.payload)
       // console.log(" payload at store destruct:",  payload)
     },
     setDisableDownloadBtn(state, action: PayloadAction<boolean>) {
