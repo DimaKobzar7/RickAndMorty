@@ -21,12 +21,14 @@ import classnames from "classnames";
 
 interface SmallCardProps {
   image: string;
-  id: number;
+  id: string;
   name: string;
   status: string;
   species: string;
   location: { name: string };
-  episode: { name: string }[];
+  // episode: { name: string }[];
+  //! тут есть вложености поэтому надо с тайпскриптом еще разобратся
+  episode: String[];
 }
 
 // ! чини высоту картинок карточки 

@@ -1,5 +1,5 @@
 // import { useQuery } from "@apollo/client";
-import { ReactNode, useEffect, useState, useRef, Suspense } from "react";
+import React, { ReactNode, useEffect, useState, useRef, Suspense } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   addSingleCharacter,
@@ -14,10 +14,8 @@ import classnames from "classnames";
 import { Col, Row } from "antd";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
-const BigCard = ({ content }) => {
+const BigCard: React.FC = () => {
   // console.log("props at card:", props);
-
-  console.log("content at big card at use ef depence props:", content);
 
   const singleCharacter = useAppSelector(
     (state) => state.secondTest.singleCharacter
@@ -33,11 +31,11 @@ const BigCard = ({ content }) => {
 
   useEffect(() => {
     const getCardInfo = async () => {
-      console.log("id outer:", id);
-      console.log("singleCharacterID outer:", singleCharacterID);
+      // console.log("id outer:", id);
+      // console.log("singleCharacterID outer:", singleCharacterID);
       if (id && id !== singleCharacterID) {
-        console.log("id in if:", id);
-        console.log("singleCharacterID in if:", singleCharacterID);
+        // console.log("id in if:", id);
+        // console.log("singleCharacterID in if:", singleCharacterID);
         dispatch(setSingleCharacterID(id));
       }
 
@@ -74,10 +72,10 @@ const BigCard = ({ content }) => {
         );
 
         console.log("cardData at bigCard:", cardData);
-        console.log(
-          "cardData at cardData.payload.data.character:",
-          cardData.payload.data.character
-        );
+        // console.log(
+        //   "cardData at cardData.payload.data.character:",
+        //   cardData.payload.data.character
+        // );
 
         dispatch(addSingleCharacter(cardData.payload.data.character));
         // setTestSingleCharacter(cardData.payload.data.character);
@@ -87,9 +85,6 @@ const BigCard = ({ content }) => {
     getCardInfo();
   }, []);
 
-  // ! проблема в том что если уходишь через браузер назад и заходишь снова через стрелки браузера то данные теряются
-  // ! редакс нужен был чтобы чтобы при заходе на одного и того же персонажа не посылался запрос запрос на персонажа что уже был
-  // может тут юз колбек или мемо пригодиться?
   return (
     <>
       {singleCharacter?.image && (

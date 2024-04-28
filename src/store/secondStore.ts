@@ -78,6 +78,8 @@ export const fetchCharacters = createAsyncThunk(
   }
 );
 
+
+
 const secondStoreSlice = createSlice({
   name: "characters2",
 
@@ -158,7 +160,7 @@ const secondStoreSlice = createSlice({
       // console.log("action.payload at store for singleCharacter:", action.payload)
       // console.log("state.singleCharacterID at store for singleCharacter:", state.singleCharacterID)
     },
-    setCurrentPaginationPage(state, action: PayloadAction<number>) {
+    setCurrentPaginationPage(state, action: PayloadAction<string>) {
       // const { data, payload } = action.payload;
 
       // state.singleCharacterID = payload;

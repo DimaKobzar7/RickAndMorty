@@ -290,10 +290,9 @@ const HomePageJS: React.FC  = () => {
 
         <div className={`${homePageStyles["homePage__cards"]}`}>
           {test2.results &&
-            test2.results.map((data, index) => {
+            test2.results.map((data) => {
               return (
                 <SmallCard
-                  index={index}
                   key={data.id}
                   image={data.image}
                   id={data.id}
@@ -309,7 +308,8 @@ const HomePageJS: React.FC  = () => {
       </AppContainer>
 
       <AppPagination
-        currentPage={+searchParams.get("page")}
+      currentPage={searchParams.get("page")}
+        // currentPage={+searchParams.get("page")}
         total={test2?.info?.pages}
         pagination={pagination}
         nextPage={test2?.info?.next}
