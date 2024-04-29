@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 // import "./App.css";
 import { RouterProvider } from "react-router";
 
@@ -9,9 +9,10 @@ import AppDrawer from "./components/appDrawer/AppDrawer";
 import { useDispatch, useSelector } from "react-redux";
 import { useAppSelector } from './hooks/hooks';
 
-const App = () => {
+const App: FC = () => {
   
-  const dispatch = useDispatch();
+  
+  // const dispatch = useDispatch();
 
   const [openDrawer, setOpenDrawer] = useState(false);
 

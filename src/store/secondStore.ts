@@ -117,11 +117,11 @@ const secondStoreSlice = createSlice({
       // const { data, payload } = action.payload;
       //! не хочет работать без детруктуризации тут надо разобратся
       // ! а нужен ли мне редакс тут для одного места на одной странице?
-      const { payload } = action.payload;
+      // const { payload } = action.payload;
       // state.singleCharacter = payload;
       // state.singleCharacter = action.payload;
       // console.log("data at store destruct at addSingleCharacter:", data) 
-      console.log(" payload at store destruct at addSingleCharacter:",  payload)
+      // console.log(" payload at store destruct at addSingleCharacter:",  payload)
       console.log("action at store destruct at addSingleCharacter:",  action)
       // console.log("action.payload at store for singleCharacter:", action.payload)
       // console.log("state.singleCharacter at store for singleCharacter:", state.singleCharacter)
@@ -131,7 +131,7 @@ const secondStoreSlice = createSlice({
       // console.log("it is  addCharacters")
       // state.singleCharacter = action.payload;
       // const { data, payload } = action.payload;
-      const { payload } = action.payload;
+      // const { payload } = action.payload;
       // console.log("payload at add character:", payload);
       // console.log("action at add character:", action);
       // state.characters2 = payload;
@@ -152,7 +152,7 @@ const secondStoreSlice = createSlice({
       // console.log("payload at add character:", payload);
     },
     setSingleCharacterID(state, action: PayloadAction<string>) {
-      const { data, payload } = action.payload;
+      // const { data, payload } = action.payload;
       // state.singleCharacterID = payload;
       state.singleCharacterID = action.payload;
       // console.log("action.payload:", action.payload)
@@ -173,7 +173,7 @@ const secondStoreSlice = createSlice({
       // console.log(" payload at store destruct:",  payload)
     },
     setDisableDownloadBtn(state, action: PayloadAction<boolean>) {
-      const { data, payload } = action.payload;
+      // const { data, payload } = action.payload;
       // state.singleCharacterID = payload;
       state.disableDownloadBtn = action.payload;
       // console.log("action.payload:", action.payload)

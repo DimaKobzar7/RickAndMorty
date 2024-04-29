@@ -27,9 +27,9 @@ const SelectedCharacterJSX: React.FC = () => {
   const singleCharacter = useAppSelector(
     (state) => state.secondTest.singleCharacter
   );
-  const singleCharacterID = useAppSelector(
-    (state) => state.secondTest.singleCharacterID
-  );
+  // const singleCharacterID = useAppSelector(
+  //   (state) => state.secondTest.singleCharacterID
+  // );
 
 
 

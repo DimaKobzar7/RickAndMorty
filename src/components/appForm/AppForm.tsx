@@ -1,19 +1,18 @@
 import React, { useEffect, useState } from "react";
 // import ReactDOM, { createPortal } from "react-dom";
 // import { Formik, Form, useField, Field, useFormikContext } from "formik";
-import AppSelect from "./AppSelect";
-import AppInputs from "./AppInputs";
+import AppSelect from "../appSelect/AppSelect";
+
 import classnames from "classnames";
 //  import * as Yup from 'yup';
 
 import appFormStyles from "./AppForm.module.scss";
-import customSelectInputsStyles from "../formikCurrent/AppInputs.module.scss";
-import AppModal from "../appModal/AppModal";
+
+// import AppModal from "../appModal/AppModal";
 import { Button, Modal, ConfigProvider } from "antd";
 
 import modalStyles from "../appModal/AppModal.module.scss";
 
-// import customSelectInputsStyles from "../formikCurrent/AppInputs.module.scss";
 import {
   fetchCharacters,
   addCharacters,
@@ -36,27 +35,29 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { charactersRequest } from "../../api";
 import Tips from "../tips/Tips";
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+
 
 // And now we can use these
-const AppForm = () => {
+const AppForm: React.FC = () => {
   // const displayData = useSelector((state) => state.secondTest.characters2);
   // const formData = useSelector((state) => state.formStore);
   // const filterRequest = useSelector((state) => state.formStore.filterRequest);
-  const defaultInput = useSelector((state) => state.formStore.defaultInput);
+  // const defaultInput = useAppSelector((state) => state.formStore.defaultInput);
   // form input data
   // const characters = useSelector((state) => state.formStore.character);
   // const locations = useSelector((state) => state.formStore.location);
   // const episodes = useSelector((state) => state.formStore.episode);
 
-  const filterRequestData = useSelector(
+  const filterRequestData = useAppSelector(
     (state) => state.formStore.filterRequestData
   );
 
-  const modalIsOpen = useSelector((state) => state.formStore.modalIsOpen);
+  const modalIsOpen = useAppSelector((state) => state.formStore.modalIsOpen);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const characterPlaceholder = [
     "Add Name",
     "Add Status",
@@ -107,11 +108,11 @@ const AppForm = () => {
 
   // const [filterIsOpen, setFilterIsOpen] = useState(false);
 
-  const filterIsOpen = useSelector((state) => state.formStore.filterIsOpen);
+  const filterIsOpen = useAppSelector((state) => state.formStore.filterIsOpen);
 
   // console.log()
 
-  const handleCancel = (e) => {
+  const handleCancel = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     console.log("e.target at handleCancel:", e.target);
 
     dispatch(setModalIsOpen(false));
@@ -199,7 +200,7 @@ const AppForm = () => {
       padding: 0,
       display: "flex",
       // width: "auto",
-      flexDirection: "column",
+      flexDirection: "column" ,
       // gap: 16,
     },
     // footer: {
@@ -209,12 +210,12 @@ const AppForm = () => {
   };
 
   const getCardInfo = async (
-    page,
-    characterName,
-    characterStatus,
-    characterSpecies,
-    characterType,
-    characterGender
+    page: number = 1,
+    characterName?: string,
+    characterStatus?: string,
+    characterSpecies?: string,
+    characterType?: string,
+    characterGender?: string
   ) => {
     // await тут нужен
     const cardData = await dispatch(
@@ -242,41 +243,71 @@ const AppForm = () => {
     dispatch(addCharacters(cardData.payload.data.characters));
   };
 
-  function areObjectsEqual(obj1, obj2) {
+  // !это функция до переписывания на тайпскрипт
+  // function areObjectsEqual(obj1, obj2) {
+  //   // Get the keys of the first object
+  //   if (!obj1 || !obj2) {
+  //     return;
+  //   }
+  //   const keys = Object.keys(obj1);
+
+  //   // Check if the number of keys is the same in both objects
+  //   if (keys.length !== Object.keys(obj2).length) {
+  //     return false;
+  //   }
+
+  //   // Iterate over the keys and compare the values
+  //   for (let key of keys) {
+  //     // If the value in obj1[key] is different from obj2[key], return false
+  //     if (obj1[key] !== obj2[key]) {
+  //       return false;
+  //     }
+  //   }
+
+  //   // If all values are the same, return true
+  //   return true;
+  // }
+  function areObjectsEqual(obj1: Record<string, string>, obj2: Record<string, string>): boolean {
     // Get the keys of the first object
     if (!obj1 || !obj2) {
-      return;
-    }
-    const keys = Object.keys(obj1);
-
-    // Check if the number of keys is the same in both objects
-    if (keys.length !== Object.keys(obj2).length) {
       return false;
     }
-
+    const keys1 = Object.keys(obj1);
+    const keys2 = Object.keys(obj2);
+  
+    // Check if the number of keys is the same in both objects
+    if (keys1.length !== keys2.length) {
+      return false;
+    }
+  
     // Iterate over the keys and compare the values
-    for (let key of keys) {
+    for (let key of keys1) {
       // If the value in obj1[key] is different from obj2[key], return false
       if (obj1[key] !== obj2[key]) {
         return false;
       }
     }
-
+  
     // If all values are the same, return true
     return true;
   }
+  
 
   // долго думает секунд 2 и висят старые карточки надо лоудер или еще что то воткнуть
   // ! надо что то придумать с пустыми полями в локал стредже так как когда там все пусто то при перезагрузке не летит заапрос
-  const submitForm = (e) => {
+  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("gg submitForm");
 
     // console.log("filterRequestData:", filterRequestData);
 
-    const localStorageData = JSON.parse(
-      localStorage.getItem("userSearchQuery")
-    );
+    const localStorageItem = localStorage.getItem("userSearchQuery");
+    const localStorageData = localStorageItem ? JSON.parse(localStorageItem) : null;
+
+    // ! это было раньше
+    // const localStorageData = JSON.parse(
+    //   localStorage.getItem("userSearchQuery")
+    // );
 
     const allFilterRequestDataIsEmpty = Object.values(filterRequestData).every(
       (item) => Boolean(item) === false
@@ -314,7 +345,7 @@ const AppForm = () => {
     );
   };
 
-  const getFilterRequestData = (event, searchCriterion) => {
+  const getFilterRequestData = (event: React.ChangeEvent<HTMLInputElement>, searchCriterion: string) => {
     // console.log("event at getFilteredInputData:", event);
 
     const { name, value } = event.target;
@@ -343,13 +374,23 @@ const AppForm = () => {
 
     // просто отслеживай номер страницы 1 если сброс был то будет 1 и больше не надо запрос для карточек делать
     // && searchParams.get("page") !== "1"
-    if (!JSON.parse(localStorage.getItem("userSearchQuery"))) {
-      // console.log("put it here");
-      return;
-    }
+
+    const userSearchQuery = localStorage.getItem("userSearchQuery");
+    //! неясно нужно ли это условие
+if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
+    // console.log("put it here");
+    return;
+}
+    //! это было
+    // if (!JSON.parse(localStorage.getItem("userSearchQuery"))) {
+    //   // console.log("put it here");
+    //   return;
+    // }
 
     if (filterIsOpen) {
-      getCardInfo(1);
+      //! было это
+      // getCardInfo(1);
+      getCardInfo();
 
       // setSearchParams(`page=${1}`);
       localStorage.removeItem("userSearchQuery");
@@ -417,23 +458,14 @@ const AppForm = () => {
                   gender={gender}
                 />
                 <div className={modalStyles["appModal__wrap"]}>
-                  {/* name='character' */}
-                  {/*  filterRequestData={filterRequestData} */}
-                  {/* <AppInputs
-                    charactersInfo={charactersName}
-                    characterPlaceholder={characterPlaceholder}
-                    type='text'
-                    getInputValue={getFilterRequestData}
-                    charactersValues={charactersValues}
-                  /> */}
-                  <div className={customSelectInputsStyles["selectInputs"]}>
+                  <div className={appFormStyles["appForm__input-wrap"]}>
                     {charactersName.map((item, i) => {
                       return (
                         <input
                           name={item}
                           placeholder={characterPlaceholder[i]}
                           className={
-                            customSelectInputsStyles["selectInputs__input"]
+                            appFormStyles["appForm__input"]
                           }
                           key={item}
                           value={charactersValues[i]}
@@ -463,15 +495,9 @@ const AppForm = () => {
                         />
                       );
                     })}
-                    {/* <button
-                      type='submit'
-                      className={appFormStyles["appForm__filterBtn"]}
-                      onClick={submitForm}
-                    >
-                      find
-                    </button> */}
                   </div>
 
+{/* без этого клика не работает поиск в модалке */}
                   <button
                     type='submit'
                     className={appFormStyles["appForm__filterBtn"]}
@@ -485,41 +511,17 @@ const AppForm = () => {
 
             {!modalIsOpen && (
               <>
-                <div className={customSelectInputsStyles["selectInputs"]}>
+                <div className={appFormStyles["appForm__input-wrap"]}>
                   {/* characterName */}
                   {/*  value={filterRequestData.defaultCharacterName} */}
                   {/* defaultCharacterName */}
                   <input
                     name='characterName'
                     placeholder='Add character`s name'
-                    className={customSelectInputsStyles["selectInputs__input"]}
+                    className={appFormStyles["appForm__input"]}
                     value={filterRequestData.characterName}
                     onChange={(e) => getFilterRequestData(e, "characterName")}
                   />
-
-                  {/*  value={inputTest} */}
-                  {/* <input
-                    name='characterName'
-                    placeholder='test name'
-                    className={customSelectInputsStyles["selectInputs__input"]}
-                    value={inputTestStore}
-                    onChange={(event) => {
-                      const { name, value } = event.target;
-
-                      // тут все работает
-                      console.log("name at store inputTest:", name);
-                      console.log("value at store inputTest:", value);
-                      // dispatch(
-                      //   setFilterRequestData({
-                      //     value,
-                      //     fieldName: name,
-                      //   })
-                      // );
-
-                      dispatch(setInputTest(value));
-                      // dispatch(setInputTest({ value }));
-                    }}
-                  /> */}
                 </div>
                 <button
                   type='submit'

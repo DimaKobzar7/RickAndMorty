@@ -31,7 +31,7 @@ import {
 import AppPagination from "../../components/appPagination/AppPagination";
 import { useSearchParams } from "react-router-dom";
 
-import AppForm from "../../components/formikCurrent/AppForm";
+import AppForm from "../../components/appForm/AppForm";
 
 // test for title scroll animation at cards
 import cardStyles from "../../components/smallCard/SmallCard.module.scss";
