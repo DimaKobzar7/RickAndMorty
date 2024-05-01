@@ -21,9 +21,11 @@
   }
 
   &__wrap {
-    @media (max-width: 991px) {
-      display: flex;
-      justify-content: center;
-    }
+    display: flex;
+    justify-content: center;
+    // @media (max-width: 991px) {
+    //   display: flex;
+    //   justify-content: center;
+    // }
   }
 }

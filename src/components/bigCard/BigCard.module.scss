@@ -28,11 +28,13 @@
   //   width: 100%;
   // }
 
-  @media (max-width: 1340px) {
-    // width: 500px;
-    // ! не помогает убрать прыжок футера пока нет карточки
-    // min-height: 570px;
-  }
+  max-width: 1200px;
+  // @media (max-width: 1340px) {
+  //   max-width: 1200px;
+  //   // width: 500px;
+  //   // ! не помогает убрать прыжок футера пока нет карточки
+  //   // min-height: 570px;
+  // }
 
   // @media (max-width: 1120px) {
   //   width: 440px;
@@ -79,7 +81,8 @@
     // height: 600px;
     // width: 570px;
     height: 570px;
-    min-width: 595px;
+    // min-width: 595px;
+    min-width: 500px;
     // flex-basis: 50%;
     // flex-basis: 50%;
     // flex-basis: 60%;
@@ -87,7 +90,7 @@
 
     @media (max-width: 1539px) {
       height: 550px;
-      min-width: 500px;
+      // min-width: 500px;
     }
 
     @media (max-width: 1200px) {
