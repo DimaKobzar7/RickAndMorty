@@ -19,4 +19,11 @@
   @media (max-width: 575px) {
     padding: 16px 0;
   }
+
+  &__wrap {
+    @media (max-width: 991px) {
+      display: flex;
+      justify-content: center;
+    }
+  }
 }

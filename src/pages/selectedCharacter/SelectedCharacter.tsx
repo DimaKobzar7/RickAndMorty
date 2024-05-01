@@ -79,20 +79,11 @@ const SelectedCharacterJSX: React.FC = () => {
     <div className={selectedCharacterStyles["selectedCharacter"]}>
     
       <AppContainer>
-        {/* <BigCard content={singleCharacter} /> */}
-        <Row justify='center'>
-          <Col xs={1}></Col>
-          <Col xs={22}>
-            {/* <BigCard content={singleCharacter} /> */}
-            {/* <BigCard content={testSingleCharacter} /> */}
-            <BigCard />
-            {/* <Suspense fallback={<h1>GG WP</h1>}>
-              <BigCard/>
-            </Suspense> */}
-            
-          </Col>
-          <Col xs={1}></Col>
-        </Row>
+        <div className={selectedCharacterStyles["selectedCharacter__wrap"]}>
+          <BigCard />
+        </div>
+       
+        
       </AppContainer>
 
       

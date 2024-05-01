@@ -112,12 +112,7 @@ const formStoreSlice = createSlice({
 
       // console.log("state.modalIsOpen at store:", state.modalIsOpen);
     },
-    setInputTest(state, action: PayloadAction<string>) {
-      console.log("action at ssetInputTest:", action);
-      state.inputTest = action.payload;
-
-      // console.log("state.modalIsOpen at store:", state.modalIsOpen);
-    },
+   
   },
 });
 
@@ -132,7 +127,7 @@ export const {
   clearFilterRequest,
   setFilterIsOpen,
   // setDefaultInput,
-  setInputTest,
+
 } = formStoreSlice.actions;
 
 export default formStoreSlice.reducer;
