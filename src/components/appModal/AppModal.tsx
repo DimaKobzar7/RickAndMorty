@@ -1,4 +1,4 @@
-import React, { useEffect, useState, FC } from "react";
+import React, { useEffect, useState, FC, ChangeEvent } from "react";
 
 // import AppModal from "../appModal/AppModal";
 import { Modal, ConfigProvider } from "antd";
@@ -8,10 +8,15 @@ import modalStyles from "../appModal/AppModal.module.scss";
 import Tips from "../tips/Tips";
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
-
+interface Props {
+  handleInput: (event: ChangeEvent<HTMLInputElement>) => void;
+  onSubmit: () => void;
+  modalOpen: boolean;
+  modalClose: () => void;
+}
 
 // And now we can use these
-const AppModal: FC = ({handleInput, onSubmit, modalOpen, modalClose}) => {
+const AppModal: FC<Props> = ({handleInput, onSubmit, modalOpen, modalClose}) => {
   
   const filterRequestData = useAppSelector(
     (state) => state.formStore.filterRequestData
@@ -180,12 +185,6 @@ const AppModal: FC = ({handleInput, onSubmit, modalOpen, modalClose}) => {
                 find
               </button>
               </div>
-              {/* <button
-                type='submit'
-                className={modalStyles["appModal__filterBtn"]}
-              >
-                find
-              </button> */}
             </div>
           </form>
           
