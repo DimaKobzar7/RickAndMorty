@@ -1,18 +1,19 @@
-// import { useQuery } from "@apollo/client";
-import React, { ReactNode, useEffect, useState, useRef, Suspense } from "react";
-import { Link, useParams } from "react-router-dom";
+
+import React, {  useEffect,  } from "react";
+import { useParams } from "react-router-dom";
 import {
   addSingleCharacter,
   fetchCharacters,
-  setDOMLoaded,
+
   setSingleCharacterID,
 } from "../../store/secondStore";
 
-import AppContainer from "../container/Container";
 import cardStyles from "./BigCard.module.scss";
 import classnames from "classnames";
-import { Col, Row } from "antd";
+// import { Col, Row } from "antd";
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
+
+import { Character } from '../../interfaces/CharactersRequest';
 
 const BigCard: React.FC = () => {
   // console.log("props at card:", props);
@@ -41,7 +42,24 @@ const BigCard: React.FC = () => {
 
       if (id !== singleCharacterID) {
         //! делаю сброс чтобы не появилось мелькание старой картинки
-        dispatch(addSingleCharacter({}));
+        // просто пустой обект поставить не получается
+        dispatch(addSingleCharacter({
+          id: '',
+          name: '',
+          status: '',
+          species: '',
+          gender: '',
+          origin: {
+            dimension: null,
+            name: '',
+          },
+          location: {
+            dimension: null,
+            name: '',
+          },
+          image: '',
+          episode: []
+        }));
 
         const cardData = await dispatch(
           fetchCharacters({
@@ -77,8 +95,15 @@ const BigCard: React.FC = () => {
         //   cardData.payload.data.character
         // );
 
-        dispatch(addSingleCharacter(cardData.payload.data.character));
-        // setTestSingleCharacter(cardData.payload.data.character);
+        // dispatch(addSingleCharacter(cardData.payload.data.character as Character));
+  
+
+        // const payloadData = cardData.payload as { data: { character: Character } } | undefined;
+        const payloadData = cardData.payload as { data: { character: Character } };
+
+        if (payloadData) {
+          dispatch(addSingleCharacter(payloadData.data.character));
+        }
       }
     };
 
