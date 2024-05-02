@@ -6,17 +6,12 @@ import { Modal, ConfigProvider } from "antd";
 import modalStyles from "../appModal/AppModal.module.scss";
 
 import Tips from "../tips/Tips";
-import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { useAppSelector } from '../../hooks/hooks';
+import { AppModalProps } from '../../interfaces/componentsProps/AppModal';
 
-interface Props {
-  handleInput: (event: ChangeEvent<HTMLInputElement>) => void;
-  onSubmit: () => void;
-  modalOpen: boolean;
-  modalClose: () => void;
-}
 
 // And now we can use these
-const AppModal: FC<Props> = ({handleInput, onSubmit, modalOpen, modalClose}) => {
+const AppModal: FC<AppModalProps> = ({handleInput, onSubmit, modalOpen, modalClose}) => {
   
   const filterRequestData = useAppSelector(
     (state) => state.formStore.filterRequestData
@@ -125,6 +120,8 @@ const AppModal: FC<Props> = ({handleInput, onSubmit, modalOpen, modalClose}) => 
       //   padding: "210px", // Пример изменения отступа для маленьких экранов
       // },
       // gap: 16,
+      borderRadius: '20px',
+      overflow: 'hidden'
     },
     // footer: {
     //   borderTop: "none",

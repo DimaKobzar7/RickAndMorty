@@ -15,10 +15,7 @@ const MainLayout: React.FC = () => {
     <div className={mainLayoutStyles["mainLayout"]}>
       <main className={mainLayoutStyles["mainLayout__content"]}>
         <Header />
-        {/* возможно сюда чайлд а не оутлет хотя оно все в роуте стоит  */}
-        {/* <div> */}
         <Outlet />
-        {/* </div> */}
       </main>
 
       <Footer />

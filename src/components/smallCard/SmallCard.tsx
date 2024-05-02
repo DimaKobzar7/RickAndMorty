@@ -1,35 +1,11 @@
-// import { useEffect, useState } from "react";
-import { useEffect, useState, forwardRef, FC } from "react";
-// import { useDispatch, useSelector } from "react-redux";
+
+import { FC } from "react";
 import { Link } from "react-router-dom";
-
-import {
-  Card,
-  Col,
-  DatePicker,
-  Flex,
-  Pagination,
-  Row,
-  FloatButton,
-} from "antd";
-
-// Register ScrollTrigger with GSAP
-
-// import Meta from "antd/es/card/Meta";
+import { SmallCardProps } from '../../interfaces/componentsProps/SmallCard';
 import cardStyles from "./SmallCard.module.scss";
 import classnames from "classnames";
 
-interface SmallCardProps {
-  image: string;
-  id: string;
-  name: string;
-  status: string;
-  species: string;
-  location: { name: string };
-  // episode: { name: string }[];
-  //! тут есть вложености поэтому надо с тайпскриптом еще разобратся
-  episode: String[];
-}
+
 
 // ! чини высоту картинок карточки 
 // но они увеличиваются из за контента что есть больше

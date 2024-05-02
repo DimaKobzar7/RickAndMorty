@@ -1,20 +1,10 @@
-// import { useState, useEffect, useRef } from "react";
-import classnames from "classnames";
-
 import tipsStyles from "./Tips.module.scss";
+import { TipsProps } from '../../interfaces/componentsProps/Tips';
 
 // Перепроверь стили на мобилке особенно на сайари там точно места не будет при вводе в инпут оно перекроет кнопку файнд
-// ! стили мобилы поломаны
 // //! миксины не работают
 //  ! надо делать 1 айтем и туда по массиву загонять и общие стили кинуть в форму а не тут 4 цикла
 
-interface TipsProps {
-  title: string;
-  status: string[];
-  species: string[];
-  types: string[];
-  gender: string[];
-}
 
 const Tips: React.FC<TipsProps> = ({ title, status, species, types, gender }) => {
   return (

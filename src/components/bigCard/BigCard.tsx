@@ -1,21 +1,20 @@
 
-import React, {  useEffect,  } from "react";
+import  { useEffect, FC } from "react";
 import { useParams } from "react-router-dom";
 import {
   addSingleCharacter,
   fetchCharacters,
-
   setSingleCharacterID,
 } from "../../store/secondStore";
 
 import cardStyles from "./BigCard.module.scss";
 import classnames from "classnames";
-// import { Col, Row } from "antd";
+
 import { useAppDispatch, useAppSelector } from "../../hooks/hooks";
 
 import { Character } from '../../interfaces/CharactersRequest';
 
-const BigCard: React.FC = () => {
+const BigCard: FC = () => {
   // console.log("props at card:", props);
 
   const singleCharacter = useAppSelector(

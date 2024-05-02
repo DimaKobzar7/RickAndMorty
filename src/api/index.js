@@ -25,7 +25,6 @@ const charactersRequest = (
           image
           location {
             name
-            dimension
           }
           episode {
             name

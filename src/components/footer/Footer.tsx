@@ -1,9 +1,12 @@
+import { FC } from 'react';
+import { Link } from "react-router-dom";
 import footerStyles from "./Footer.module.scss";
 import logo from "../../images/img/logo.png";
 import background from "../../images/img/background.png";
-import { Link } from "react-router-dom";
 
-const Footer: React.FC = () => {
+
+
+const Footer: FC = () => {
   return (
     <footer className={footerStyles["footer"]}>
       <div className={footerStyles["footer__body"]}>
