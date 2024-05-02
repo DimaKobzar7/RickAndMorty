@@ -2,21 +2,6 @@
   margin-top: 33px;
   text-align: center;
 
-  &__body {
-    // li[class*="ant-pagination-jump-prev"],
-    // li[class*="ant-pagination-jump-next"] {
-    //   background-color: #f5f5f5;
-
-    //   span[class*="ant-pagination-item-ellipsis"],
-    //   span[class*="ant-pagination-item-link-icon"] {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     color: rgba(245, 245, 245, 1);
-    //   }
-    // }
-  }
-
   li[aria-disabled="false"] {
     background-color: #f5f5f5;
     margin-inline-end: 10px;

@@ -1,10 +1,4 @@
 .appDrawer {
-  &__body {
-    // padding: 16px;
-  }
-
-  &__mask {
-  }
 
   &__header {
     border: none;
@@ -18,16 +12,9 @@
 
   &__footer {
     border: none;
-    // padding: 16px;
+   
   }
 
-  &__content {
-    // position: absolute;
-    // width: 419px;
-    // height: 571px;
-    // top: 50%;
-    // transform: translateY(-60%);
-  }
 
   &__button {
     padding: 0 8px;

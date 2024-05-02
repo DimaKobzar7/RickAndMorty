@@ -1,36 +1,11 @@
 .appModal {
-  // display: flex;
-  // position: absolute;
-  // top: 0;
-  // width: 100vw;
-  // height: 100vh;
-  // background-color: rgba(0, 0, 0, 0.8);
-  // justify-content: center;
-  // align-items: center;
-
-  // position: fixed;
-  // inset: 0;
-  // z-index: 1000;
-  // overflow: auto;
-  // outline: 0;
-  // background-color: rgba(0, 0, 0, 0.8);
-
-  // тут везде будет проблема с сафари
-  @media (max-width: 991px) {
-    // width: 100% !important;
-    // height: 100%;
-  }
+ 
 
   &__body {
-    // display: flex;
-    // transform: translateY(-50%);
-    // height: auto;
-    // display: flex;
-    // align-items: flex-start;
-    // gap: 28px;
+
     background-color: #f5f5f5;
     @media (max-width: 1199px) {
-      // width: 100% !important;
+    
       max-width: 600px;
     }
   }
@@ -52,10 +27,6 @@
     background-color: red;
   }
 
-  // &__wrap {
-  //   width: auto;
-  //   height: 284px;
-  // }
 
   &__form {
     padding: 16px;
@@ -63,20 +34,14 @@
 
   &__wrap {
     display: flex;
-    // gap: 28px;
+  
     gap: 16px;
-    // align-items: flex-start;
-    // height: 284px;
-    // flex-wrap: wrap;
-    // justify-content: center;
-    // padding: 16px 0;
-    // margin-top: 16px;
-    // margin: 16px 0;
+
   }
 
   &__input {
     padding: 16px 12px;
-    // background-color: #f5f5f5;
+   
     background-color: #272b33;
 
     font-family: "Roboto", sans-serif;
@@ -84,7 +49,7 @@
 
     font-weight: 400;
     line-height: 1.5;
-    // color: #272b33;
+  
     color: white;
     letter-spacing: 0.5px;
     appearance: none;
@@ -107,26 +72,20 @@
       font-size: 16px;
 
       font-weight: 400;
-      // color: #272b33;
+   
       color: white;
       line-height: 1.5;
       letter-spacing: 0.5px;
     }
 
-    // &:not(:last-child) {
-    //   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
-    //   // background-color: red;
-    // }
 
     &-wrap {
-      // min-width: 260px;
-      // font-family: "Roboto", sans-serif;
-      // background-color: #f5f5f5;
+     
       display: flex;
       gap: 16px;
-      // flex-direction: column;
+     
       border-radius: 4px;
-      // overflow: hidden;
+     
     
       @media (max-width: 1199px) {
       
@@ -138,15 +97,15 @@
   }
 
   &__filterBtn {
-    // height: 56px;
+
     min-height: 56px;
     appearance: none;
     border-radius: 4px;
     outline: none;
     border: none;
-    // background-color: #f5f5f5;
+   
     background-color: #272b33;
-    // background-color: black;
+   
     min-width: 143px;
 
     font-family: "Roboto", sans-serif;
@@ -156,9 +115,9 @@
     font-weight: 400;
     line-height: 1.5;
 
-    // color: #272b33;
+  
     color: white;
-    // color:  #f5f5f5;
+
     letter-spacing: 0.5px;
     text-transform: uppercase;
 
@@ -178,12 +137,9 @@
       width: 100%;
     }
 
-    // @media (max-width: 991px) {
-    //   width: 100%;
-    // }
 
     @media (max-width: 575px) {
-      // max-width: calc(100% / 2 - 8px);
+   
       max-width: none;
       width: 100%;
     }
