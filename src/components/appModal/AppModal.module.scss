@@ -181,6 +181,16 @@
   }
 
 
+  &__icon {
+    color: #272b33;
+    // не сработало убрать синее свечение на кнопке
+    // -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+      color: #272b33;
+      // -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+  }
 
   &__filterBtn {
 

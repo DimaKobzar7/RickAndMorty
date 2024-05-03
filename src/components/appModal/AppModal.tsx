@@ -1,4 +1,5 @@
 import React, { useEffect, useState, FC, ChangeEvent } from "react";
+import { CloseOutlined } from "@ant-design/icons";
 
 // import AppModal from "../appModal/AppModal";
 import { Modal, ConfigProvider } from "antd";
@@ -131,7 +132,7 @@ const AppModal: FC<AppModalProps> = ({handleInput, onSubmit, modalOpen, modalClo
 
  
 
- 
+//  ! надо крестик на модалке сделать иначе на телефоне это не закрыть
   return (
     <ConfigProvider
         modal={{
@@ -143,10 +144,10 @@ const AppModal: FC<AppModalProps> = ({handleInput, onSubmit, modalOpen, modalClo
         <Modal
           footer={null}
           centered={true}
-          closeIcon={false}
+          closeIcon={<CloseOutlined className={modalStyles["appModal__icon"]}/>}
           open={modalOpen}
           onCancel={modalClose}
-          
+         
           width={"auto"}
           className={modalStyles["appModal"]}
         >
@@ -161,9 +162,11 @@ const AppModal: FC<AppModalProps> = ({handleInput, onSubmit, modalOpen, modalClo
             <div className={modalStyles["appModal__wrap"]}>
               <div className={modalStyles["appModal__input-wrap"]}>
                 {/* это для фильтра по критериям */}
+                {/*  autoComplete="off" это костыль что просто отключает авто дополнение */}
                 {charactersName.map((item, i) => {
                   return (
                     <input
+                   
                       name={item}
                       placeholder={characterPlaceholder[i]}
                       className={
