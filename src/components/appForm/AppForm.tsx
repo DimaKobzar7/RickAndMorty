@@ -1,22 +1,10 @@
-import React, { useEffect, useState } from "react";
-// import ReactDOM, { createPortal } from "react-dom";
-// import { Formik, Form, useField, Field, useFormikContext } from "formik";
-import AppSelect from "../appSelect/AppSelect";
-
-import classnames from "classnames";
-//  import * as Yup from 'yup';
-
+import React, { FC } from "react";
 import appFormStyles from "./AppForm.module.scss";
 
-// import AppModal from "../appModal/AppModal";
-import { Button, Modal, ConfigProvider } from "antd";
-
-import modalStyles from "../appModal/AppModal.module.scss";
 
 import {
   fetchCharacters,
   addCharacters,
-  setCurrentPaginationPage,
 } from "../../store/secondStore";
 
 import { useSearchParams } from "react-router-dom";
@@ -28,186 +16,41 @@ import {
   // setEpisode,
   // setFilterRequest,
   setFilterRequestData,
-  setInputTest,
+
   setModalIsOpen,
   // setLocation,
 } from "../../store/formStore";
-import { useDispatch, useSelector } from "react-redux";
+
 import { charactersRequest } from "../../api";
-import Tips from "../tips/Tips";
+
 import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+// import selectStyles from "./AppSelect.module.scss";
+import selectStyles from "../appSelect/AppSelect.module.scss";
+import AppModal from '../appModal/AppModal';
+import { RickAndMortyResponse } from '../../interfaces/CharactersRequest';
 
 
 // And now we can use these
-const AppForm: React.FC = () => {
-  // const displayData = useSelector((state) => state.secondTest.characters2);
-  // const formData = useSelector((state) => state.formStore);
-  // const filterRequest = useSelector((state) => state.formStore.filterRequest);
-  // const defaultInput = useAppSelector((state) => state.formStore.defaultInput);
-  // form input data
-  // const characters = useSelector((state) => state.formStore.character);
-  // const locations = useSelector((state) => state.formStore.location);
-  // const episodes = useSelector((state) => state.formStore.episode);
-
+const AppForm: FC = () => {
+  
   const filterRequestData = useAppSelector(
     (state) => state.formStore.filterRequestData
   );
 
   const modalIsOpen = useAppSelector((state) => state.formStore.modalIsOpen);
 
+  const filterIsOpen = useAppSelector((state) => state.formStore.filterIsOpen);
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useAppDispatch();
-  const characterPlaceholder = [
-    "Add Name",
-    "Add Status",
-    "Add Species",
-    "Add Type",
-    "Add Gender",
-  ];
-
-  // const charactersName = ["name", "status", "species", "type", "gender"];
-
-  const charactersName = [
-    "characterName",
-    "characterStatus",
-    "characterSpecies",
-    "characterType",
-    "characterGender",
-  ];
-
-  const charactersValues = [
-    filterRequestData.characterName,
-    filterRequestData.characterStatus,
-    filterRequestData.characterSpecies,
-    filterRequestData.characterType,
-    filterRequestData.characterGender,
-  ];
-
-  const locationPlaceholder = ["Add Name", "Add Type", "Add Dimension"];
-
-  // const locationsName = ["name", "type", "dimension"];
-
-  const locationsName = ["locationName", "locationType", "locationDimension"];
-
-  const episodesPlaceholder = ["Add Name", "Add Episode code"];
-
-  // const episodesName = ["name", "episodeCode"];
-
-  const episodesName = ["episodeName", "episodeCode"];
-
-  const defaultInputPlaceholder = ["Add key words to find"];
-
-  // const defaultInputName = ["defaultInput"];
-
-  const defaultInputName = ["defaultCharacterName"];
-
-  const filterCategory = ["Character", "Location", "Episodes"];
-
-  // const [selectIsOpen, setSelectIsOpen] = useState(false);
-
-  // const [filterIsOpen, setFilterIsOpen] = useState(false);
-
-  const filterIsOpen = useAppSelector((state) => state.formStore.filterIsOpen);
-
-  // console.log()
 
   const handleCancel = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     console.log("e.target at handleCancel:", e.target);
 
     dispatch(setModalIsOpen(false));
-    // setSelectIsOpen(true);
-
-    // dispatch(clearFilterRequest());
-    // dispatch(setCharacter(false));
   };
 
-  //! надо перепроверить
-  const species = [
-    "Human",
-    "Alien",
-    "Humanoid",
-    "Poopybutthole",
-    "Mythological",
-    "Unknown",
-    "Animal",
-    "Disease",
-    "Robot",
-    "Cronenberg",
-    // "Cyborg"
-  ];
-
-  //! надо перепроверить
-  // ! это в .env можо поставить
-  const types = [
-    // типов human много и об этом надо пометку сделать
-    "Human",
-    // типов елиен много и об этом надо пометку сделать
-    "Alien",
-
-    // "Humanoid",
-    // "Poopybutthole",
-    // "Mythological",
-    "Unknown",
-    "Animal",
-    // "Disease",
-    //  типов робот много и об этом надо пометку сделать
-    "Robot",
-    "Cronenberg",
-    "Cyborg",
-  ];
-
-  // Human: This type represents characters that are primarily human or humanoid.
-  // Alien: Characters that are not human and originate from other planets or dimensions.
-  // Robot: Characters that are mechanical beings or robots.
-  // Cyborg: Characters that are part human and part machine.
-  // Animal: Characters that are non-human animals, either sentient or non-sentient.
-  // Mythological: Characters inspired by mythology or folklore.
-  // Unknown: This type may be used for characters whose type is not specified or unknown.
-
-  // тут все возможно с маленькой буквы
-  const status = ["Alive", "Dead", "Unknown"];
-
-  const gender = ["Female", "Male", "Genderless", "Unknown"];
-
-  const classNames = {
-    body: modalStyles["appModal__body"],
-    mask: modalStyles["appModal__mask"],
-    header: modalStyles["appModal__header"],
-    footer: modalStyles["appModal__footer"],
-    content: modalStyles["appModal__content"],
-  };
-
-  const modalStylesAntd = {
-    mask: {
-      backgroundColor: "rgba(0, 0, 0, 0.8)",
-    },
-    content: {
-      backgroundColor: "transparent",
-      padding: 0,
-      boxShadow: "none",
-
-      // width: "auto",
-    },
-    header: {
-      // borderBottom: "none",
-      // padding: 0,
-      // marginBottom: 16,
-      width: "auto",
-    },
-
-    body: {
-      padding: 0,
-      display: "flex",
-      // width: "auto",
-      flexDirection: "column" ,
-      // gap: 16,
-    },
-    // footer: {
-    //   borderTop: "none",
-    //   padding: 0,
-    // },
-  };
 
   const getCardInfo = async (
     page: number = 1,
@@ -222,12 +65,6 @@ const AppForm: React.FC = () => {
       fetchCharacters(
         charactersRequest(
           page,
-          // 1
-          // filterRequestData.characterName,
-          // filterRequestData.characterStatus,
-          // filterRequestData.characterSpecies,
-          // filterRequestData.characterType,
-          // filterRequestData.characterGender
           characterName,
           characterStatus,
           characterSpecies,
@@ -238,9 +75,12 @@ const AppForm: React.FC = () => {
     );
 
     setSearchParams(`page=${page}`);
-    // setSearchParams("page=1");
-    // dispatch(addCharacters(cardData));
-    dispatch(addCharacters(cardData.payload.data.characters));
+ 
+    const payloadData = cardData.payload as { data: { characters: RickAndMortyResponse } };
+
+    if (payloadData) {
+      dispatch(addCharacters(payloadData.data.characters));
+    }
   };
 
   // !это функция до переписывания на тайпскрипт
@@ -295,8 +135,8 @@ const AppForm: React.FC = () => {
 
   // долго думает секунд 2 и висят старые карточки надо лоудер или еще что то воткнуть
   // ! надо что то придумать с пустыми полями в локал стредже так как когда там все пусто то при перезагрузке не летит заапрос
-  const submitForm = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const submitForm = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     console.log("gg submitForm");
 
     // console.log("filterRequestData:", filterRequestData);
@@ -326,14 +166,7 @@ const AppForm: React.FC = () => {
 
     localStorage.setItem("userSearchQuery", JSON.stringify(filterRequestData));
 
-    // console.log("gg");
-
     dispatch(setModalIsOpen(false));
-
-    // console.log(
-    //   "filterRequestData.characterName, gggggg:",
-    //   filterRequestData.characterName
-    // );
 
     getCardInfo(
       1,
@@ -359,11 +192,8 @@ const AppForm: React.FC = () => {
 
     console.log("searchCriterion at  getFilterRequestData:", searchCriterion);
 
-    // dispatch(setFilterRequestData({ value, fieldName: name }));
     dispatch(setFilterRequestData({ value, fieldName: searchCriterion }));
-    // dispatch(
-    //   setFilterRequestData({ value: event.target.value, fieldName: name })
-    // );
+ 
   };
 
   // !тут тоже надо сделать только разовый вызов чтобы без изменений не вызывалось каждый раз
@@ -371,34 +201,35 @@ const AppForm: React.FC = () => {
     console.log("filterIsOpen at use state local storage:", filterIsOpen);
 
     dispatch(setFilterIsOpen(!filterIsOpen));
+    dispatch(clearFilterRequest());
 
     // просто отслеживай номер страницы 1 если сброс был то будет 1 и больше не надо запрос для карточек делать
     // && searchParams.get("page") !== "1"
 
     const userSearchQuery = localStorage.getItem("userSearchQuery");
     //! неясно нужно ли это условие
-if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
-    // console.log("put it here");
-    return;
-}
-    //! это было
-    // if (!JSON.parse(localStorage.getItem("userSearchQuery"))) {
-    //   // console.log("put it here");
-    //   return;
-    // }
+  if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
+      // console.log("put it here");
+      return;
+  }
+      //! это было
+      // if (!JSON.parse(localStorage.getItem("userSearchQuery"))) {
+      //   // console.log("put it here");
+      //   return;
+      // }
 
-    if (filterIsOpen) {
-      //! было это
-      // getCardInfo(1);
-      getCardInfo();
+      if (filterIsOpen) {
+        //! было это
+        // getCardInfo(1);
+        getCardInfo();
 
-      // setSearchParams(`page=${1}`);
-      localStorage.removeItem("userSearchQuery");
-    } else {
-      // localStorage.removeItem("userSearchQuery");
-    }
+        // setSearchParams(`page=${1}`);
+        localStorage.removeItem("userSearchQuery");
+      } else {
+        // localStorage.removeItem("userSearchQuery");
+      }
 
-    dispatch(clearFilterRequest());
+    // dispatch(clearFilterRequest());
   };
 
   const openSelect = () => {
@@ -407,12 +238,29 @@ if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
     console.log("modalIsOpen from store:", modalIsOpen);
   };
 
-  // const inputTestStore = useSelector((state) => state.formStore.inputTestStore);
+
+  const getOnlyChracterName = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = event.target;
+   
+    console.log(
+      "value at  getFilterRequestData:",
+      value
+    );
+
+    console.log("name at  getFilterRequestData:", name);
+
+    dispatch(
+      setFilterRequestData({ value, fieldName: name })
+    ); 
+  }
+  
 
   return (
+    <>
     <form className={appFormStyles["appForm"]} onSubmit={submitForm}>
       <div className={appFormStyles["appForm__body"]}>
         {!modalIsOpen && (
+         
           <button
             className={appFormStyles["appForm__filterBtn"]}
             type='button'
@@ -424,97 +272,33 @@ if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
 
         {filterIsOpen && (
           <div className={appFormStyles["appForm__wrap"]}>
-            {/*  handleOptionClick={handleOptionClick} */}
-            {/* filterRequest={filterRequest} */}
-            {!modalIsOpen && (
-              <AppSelect
-                filterCategory={filterCategory}
-                name='selected'
-                openSelect={openSelect}
-                isModalOpen={modalIsOpen}
-              />
-            )}
-
-            <ConfigProvider
-              modal={{
-                classNames,
-                styles: modalStylesAntd,
-              }}
-            >
-              <Modal
-                footer={null}
-                centered={true}
-                closeIcon={false}
-                open={modalIsOpen}
-                onCancel={handleCancel}
-                width={"auto"}
-                className={modalStyles["appModal"]}
-              >
-                <Tips
-                  title='Available search queries'
-                  status={status}
-                  species={species}
-                  types={types}
-                  gender={gender}
-                />
-                <div className={modalStyles["appModal__wrap"]}>
-                  <div className={appFormStyles["appForm__input-wrap"]}>
-                    {charactersName.map((item, i) => {
-                      return (
-                        <input
-                          name={item}
-                          placeholder={characterPlaceholder[i]}
-                          className={
-                            appFormStyles["appForm__input"]
-                          }
-                          key={item}
-                          value={charactersValues[i]}
-                          onChange={(event) => {
-                            const { name, value } = event.target;
-                            // console.log(
-                            //   "event.target.value at  getFilterRequestData:",
-                            //   event.target.value
-                            // );
-                            console.log(
-                              "value at  getFilterRequestData:",
-                              value
-                            );
-
-                            console.log("name at  getFilterRequestData:", name);
-
-                            // console.log(
-                            //   "searchCriterion at  getFilterRequestData:",
-                            //   searchCriterion
-                            // );
-
-                            dispatch(
-                              setFilterRequestData({ value, fieldName: name })
-                            );
-                            // dispatch(setFilterRequestData(value));
-                          }}
-                        />
-                      );
-                    })}
-                  </div>
-
-{/* без этого клика не работает поиск в модалке */}
-                  <button
-                    type='submit'
-                    className={appFormStyles["appForm__filterBtn"]}
-                    onClick={submitForm}
-                  >
-                    find
-                  </button>
-                </div>
-              </Modal>
-            </ConfigProvider>
-
             {!modalIsOpen && (
               <>
+                <div className={selectStyles["select"]} onClick={openSelect}>
+                  <div
+                    className={selectStyles["select__header"]}
+                  >
+                    <span className={selectStyles["select__current"]}>
+                      Select search criteria
+                    </span>
+
+                    <svg
+                      className={selectStyles["select__icon"]}
+                      width='24'
+                      height='24'
+                      viewBox='0 0 24 24'
+                      fill='none'
+                      xmlns='http://www.w3.org/2000/svg'
+                    >
+                      <path
+                        d='M6.98438 9.98438H17.0156L12 15L6.98438 9.98438Z'
+                        fill='#272B33'
+                      />
+                    </svg>
+                  </div>
+                </div>
+
                 <div className={appFormStyles["appForm__input-wrap"]}>
-                  {/* characterName */}
-                  {/*  value={filterRequestData.defaultCharacterName} */}
-                  {/* defaultCharacterName */}
                   <input
                     name='characterName'
                     placeholder='Add character`s name'
@@ -523,6 +307,7 @@ if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
                     onChange={(e) => getFilterRequestData(e, "characterName")}
                   />
                 </div>
+
                 <button
                   type='submit'
                   className={appFormStyles["appForm__filterBtn"]}
@@ -535,6 +320,9 @@ if (!userSearchQuery || !JSON.parse(userSearchQuery)) {
         )}
       </div>
     </form>
+    <AppModal handleInput={getOnlyChracterName} onSubmit={submitForm} modalOpen={modalIsOpen} modalClose={handleCancel}/>
+    </>
+    
   );
 };
 

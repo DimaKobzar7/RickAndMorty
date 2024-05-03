@@ -1,20 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 
+import { FormStoreState } from '../interfaces/FormStore';
 
-interface FilterRequestData {
-  characterName: string;
-  characterStatus: string;
-  characterSpecies: string;
-  characterType: string;
-  characterGender: string;
-}
-
-interface FormStoreState {
-  filterRequestData: FilterRequestData;
-  modalIsOpen: boolean;
-  filterIsOpen: boolean;
-  inputTest: string;
-}
 
 const initialState: FormStoreState = {
   filterRequestData: {
@@ -26,55 +13,27 @@ const initialState: FormStoreState = {
   },
   modalIsOpen: false,
   filterIsOpen: false,
-  inputTest: "",
 };
 
 const formStoreSlice = createSlice({
   name: "formStore",
 
-  // возможно стоитсделать несколько сторов
-  // initialState: {
-  //   // общий стейт для 3х сущностей
-  //   filterRequestData: {
-  //     characterName: "",
-  //     characterStatus: "",
-  //     characterSpecies: "",
-  //     characterType: "",
-  //     characterGender: "",
-  //   },
-
-  //   modalIsOpen: false,
-  //   filterIsOpen: false,
-  //   inputTest: "",
-  // },
   initialState,
   // тут мы не пишем state.characters.characters так как characters что в индексе при конфиг сторе он глобальный
   // а тут это слайс про глобальный ничего не знает тут только characters что тут есть
+  // тут надо Partial<FormStoreState["filterRequestData"] поправить
+  // Partial<FormStoreState["filterRequestData"]>> означает, что параметр action.payload может быть частичным объектом типа FormStoreState["filterRequestData"], то есть он может содержать некоторые, но не все поля, определенные в типе FormStoreState["filterRequestData"]
+  // вот переделака 
+  //Partial<{
+//   characterName: string;
+//   characterStatus: string;
+//   characterSpecies: string;
+//   characterType: string;
+//   characterGender: string;
+// }>
   reducers: {
-    setFilterRequestData(state, action: PayloadAction<{ fieldName: string; value: string }>) {
+    setFilterRequestData(state, action: PayloadAction<{ fieldName: string; value: string } | Partial<FormStoreState["filterRequestData"]>>) {
     
-
-      //! это было раньше
-      // if (Object.keys(action.payload).includes("value")) {
-      //   // console.log("at store  action.payload.value IF");
-      //   state.filterRequestData = {
-      //     ...state.filterRequestData,
-      //     [action.payload.fieldName]: action.payload.value,
-      //   };
-      // } else {
-
-      //   state.filterRequestData = {
-      //     ...state.filterRequestData,
-      //     // [action.payload]: action.payload,
-      //     ...action.payload,
-      //   };
-      // }
-
-      // console.log(
-      //   "state.filterRequestData at store at setFilterRequestData:",
-      //   state.filterRequestData
-      // );
-      // !новое
       if ("value" in action.payload) {
         state.filterRequestData = {
           ...state.filterRequestData,
@@ -101,16 +60,10 @@ const formStoreSlice = createSlice({
     },
 
     setModalIsOpen(state, action: PayloadAction<boolean>) {
-      // console.log("action at setModalIsOpen:", action);
       state.modalIsOpen = action.payload;
-
-      // console.log("state.modalIsOpen at store:", state.modalIsOpen);
     },
     setFilterIsOpen(state, action: PayloadAction<boolean>) {
-      // console.log("action at setModalIsOpen:", action);
       state.filterIsOpen = action.payload;
-
-      // console.log("state.modalIsOpen at store:", state.modalIsOpen);
     },
    
   },
@@ -118,16 +71,10 @@ const formStoreSlice = createSlice({
 
 // тут надо указывать название функции чтобы ее было видно в санке в этом же файле
 export const {
-  // setCharacter,
-  // setLocation,
-  // setEpisode,
   setModalIsOpen,
-  // setFilterRequest,
   setFilterRequestData,
   clearFilterRequest,
   setFilterIsOpen,
-  // setDefaultInput,
-
 } = formStoreSlice.actions;
 
 export default formStoreSlice.reducer;
