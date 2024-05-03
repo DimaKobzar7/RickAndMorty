@@ -52,3 +52,7 @@ export interface Query {
   req: string;
   filter: string;
 }
+
+export interface CharactersRequest {
+  req: string;
+}
