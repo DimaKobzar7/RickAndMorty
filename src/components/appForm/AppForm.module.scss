@@ -124,10 +124,36 @@
       letter-spacing: 0.5px;
     }
 
-    &:not(:last-child) {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      font-family: "Roboto", sans-serif;
+      // во время выбора ответа оно делает высоту но не меняет высоту самого выбора
+      font-size: 16px;
+
+      font-weight: 400;
+      line-height: 1.5;
     
+      // простой цвет не работает
+      // color: white;
+      letter-spacing: 0.5px;
+      -webkit-text-fill-color:  #272b33;
+      -webkit-box-shadow: 0 0 0px 1000px white inset;
+      transition: background-color 5000s ease-in-out 0s ;
+
+      // caret-color: white;
     }
+
+    // &:not(:last-child) {
+    //   border-bottom: 1px solid rgba(0, 0, 0, 0.42);
+    
+    // }
 
     &-wrap {
       min-width: 260px;
