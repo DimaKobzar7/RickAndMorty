@@ -28,6 +28,11 @@ import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 import selectStyles from "../appSelect/AppSelect.module.scss";
 import AppModal from '../appModal/AppModal';
 import { RickAndMortyResponse } from '../../interfaces/CharactersRequest';
+import { FilterRequestData } from '../../interfaces/FormStore';
+import { CharacterNames, CharacterPlaceholders } from '../../Enums/AppModal';
+import { TipsText, CharacterSpecies, CharacterTypes, CharacterStatus, CharacterGender } from '../../Enums/Tips';
+
+import Tips from '../tips/Tips';
 
 
 // And now we can use these
@@ -41,12 +46,39 @@ const AppForm: FC = () => {
 
   const filterIsOpen = useAppSelector((state) => state.formStore.filterIsOpen);
 
+  const characterNames: CharacterNames[] = [CharacterNames.Name, CharacterNames.Status,CharacterNames.Species, CharacterNames.Type, CharacterNames.Gender];
+
+  const characterPlaceholders: CharacterPlaceholders[] = [CharacterPlaceholders.Name, CharacterPlaceholders.Status,CharacterPlaceholders.Species, CharacterPlaceholders.Type, CharacterPlaceholders.Gender]
+
+  const characterValues = [
+    filterRequestData.characterName,
+    filterRequestData.characterStatus,
+    filterRequestData.characterSpecies,
+    filterRequestData.characterType,
+    filterRequestData.characterGender,
+  ] as (keyof FilterRequestData)[];
+
+
+  // console.log("characterNamesArray:", characterNames)
+
+  // console.log("characterPlaceholders:", characterPlaceholders)
+
+  // есть ли смысл сюда писать типы если они определены в пропсах?
+  const tipsStatus: string[] = Object.values(CharacterStatus);
+
+  const tipsSpecies: string[] = Object.values(CharacterSpecies);
+
+  const tipsTypes: string[] = Object.values(CharacterTypes);
+
+  const tipsGender: string[] = Object.values(CharacterGender);
+
+
   const [searchParams, setSearchParams] = useSearchParams();
 
   const dispatch = useAppDispatch();
 
-  const handleCancel = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    console.log("e.target at handleCancel:", e.target);
+  const handleCancel = () => {
+   console.log("handleCancel  is working")
 
     dispatch(setModalIsOpen(false));
   };
@@ -83,37 +115,20 @@ const AppForm: FC = () => {
     }
   };
 
-  // !это функция до переписывания на тайпскрипт
-  // function areObjectsEqual(obj1, obj2) {
-  //   // Get the keys of the first object
-  //   if (!obj1 || !obj2) {
-  //     return;
-  //   }
-  //   const keys = Object.keys(obj1);
-
-  //   // Check if the number of keys is the same in both objects
-  //   if (keys.length !== Object.keys(obj2).length) {
-  //     return false;
-  //   }
-
-  //   // Iterate over the keys and compare the values
-  //   for (let key of keys) {
-  //     // If the value in obj1[key] is different from obj2[key], return false
-  //     if (obj1[key] !== obj2[key]) {
-  //       return false;
-  //     }
-  //   }
-
-  //   // If all values are the same, return true
-  //   return true;
-  // }
-  function areObjectsEqual(obj1: Record<string, string>, obj2: Record<string, string>): boolean {
+    function areObjectsEqual(obj1: FilterRequestData, obj2: FilterRequestData): boolean {
+    // console.log("obj1 at areObjectsEqual:", obj1)
+    // console.log("obj2 at areObjectsEqual:", obj2)
     // Get the keys of the first object
     if (!obj1 || !obj2) {
       return false;
     }
-    const keys1 = Object.keys(obj1);
-    const keys2 = Object.keys(obj2);
+    // const keys1 = Object.keys(obj1);
+    // const keys2 = Object.keys(obj2);
+    const keys1 = Object.keys(obj1) as (keyof FilterRequestData)[];
+    const keys2 = Object.keys(obj2) as (keyof FilterRequestData)[];
+
+    // console.log("keys1 at areObjectsEqual:",keys1)
+    // console.log("keys2 at areObjectsEqual:",keys2)
   
     // Check if the number of keys is the same in both objects
     if (keys1.length !== keys2.length) {
@@ -139,7 +154,7 @@ const AppForm: FC = () => {
     event.preventDefault();
     console.log("gg submitForm");
 
-    // console.log("filterRequestData:", filterRequestData);
+    console.log("filterRequestData at submitForm:", filterRequestData);
 
     const localStorageItem = localStorage.getItem("userSearchQuery");
     const localStorageData = localStorageItem ? JSON.parse(localStorageItem) : null;
@@ -153,11 +168,14 @@ const AppForm: FC = () => {
       (item) => Boolean(item) === false
     );
 
+    console.log("obj is equel so return");
+
     if (
       areObjectsEqual(localStorageData, filterRequestData) ||
       (!localStorageData && allFilterRequestDataIsEmpty)
     ) {
       console.log("obj is equel so return");
+     
       // если локал сторедж и стор с запросом одинаковый то удалять локал сторедж (НЕ ПЕРЕЗАПИСАТЬ А УДАЛИТЬ!)
       // но такая штука создает возможность клаацать на кнопку и кучу запросов делать из за того что на клик по кнопке создается по новой стор
       // localStorage.removeItem("userSearchQuery");
@@ -253,7 +271,6 @@ const AppForm: FC = () => {
       setFilterRequestData({ value, fieldName: name })
     ); 
   }
-  
 
   return (
     <>
@@ -320,7 +337,24 @@ const AppForm: FC = () => {
         )}
       </div>
     </form>
-    <AppModal handleInput={getOnlyChracterName} onSubmit={submitForm} modalOpen={modalIsOpen} modalClose={handleCancel}/>
+
+    <AppModal  
+      handleInput={getOnlyChracterName} 
+      onSubmit={submitForm} 
+      modalOpen={modalIsOpen} 
+      modalClose={handleCancel} 
+      characterNames={characterNames} 
+      characterPlaceholders={characterPlaceholders}
+      characterValues={characterValues}
+    >
+      <Tips
+        text={TipsText}
+        status={tipsStatus}
+        species={tipsSpecies}
+        types={tipsTypes}
+        gender={tipsGender}
+      />
+      </AppModal>
     </>
     
   );
