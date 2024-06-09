@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import  { FC } from "react";
 // import "./App.css";
-import { RouterProvider } from "react-router";
+// import { RouterProvider } from "react-router";
 
 import { ConfigProvider, Drawer } from "antd";
 
 import appDrawerStyles from "./AppDrawer.module.scss";
+import { AppDrawerProps } from '../../interfaces/componentsProps/AppDrawer';
 
-const AppDrawer = ({ openDrawer, closeDrawer }) => {
+const AppDrawer: FC<AppDrawerProps> = ({ openDrawer, closeDrawer }) => {
   const classNames = {
     body: appDrawerStyles["appDrawer__body"],
     mask: appDrawerStyles["appDrawer__mask"],
@@ -32,7 +33,7 @@ const AppDrawer = ({ openDrawer, closeDrawer }) => {
     body: {
       padding: 0,
       display: "flex",
-      flexDirection: "column",
+      flexDirection: "column" as const,
       gap: 16,
     },
     footer: {
@@ -49,6 +50,14 @@ const AppDrawer = ({ openDrawer, closeDrawer }) => {
     <ConfigProvider drawer={{ classNames, styles: drawerStyles }}>
       {/* styles.wrapper */}
       {/*  contentWrapperStyle был вместо  styles.wrapper*/}
+      {/* styles={{
+          boxShadow: "none" ,
+          width: 419,
+          height: 571,
+          top: "50%",
+          translate: "0 -55%",
+          fontFamily: "Roboto, sans-serif",
+        }} */}
       <Drawer
         title={
           <h2 className={appDrawerStyles["appDrawer__header"]}>History</h2>
@@ -65,14 +74,7 @@ const AppDrawer = ({ openDrawer, closeDrawer }) => {
         }
         onClose={closeDrawer}
         open={openDrawer}
-        styles={{
-          boxShadow: "none",
-          width: 419,
-          height: 571,
-          top: "50%",
-          translate: "0 -55%",
-          fontFamily: "Roboto, sans-serif",
-        }}
+       
       >
         <p className={appDrawerStyles["appDrawer__subTitle"]}>Character:</p>
         <p className={appDrawerStyles["appDrawer__text"]}>Some contents...</p>
