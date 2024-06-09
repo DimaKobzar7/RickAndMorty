@@ -8,6 +8,7 @@
 
   margin-bottom: 20px;
 
+  // нужен чтобы фильтр не прыгол после открытия подсказки
   height: 56px;
 
   @media (max-width: 991px) {
@@ -37,7 +38,8 @@
   &__wrap {
     display: flex;
     gap: 28px;
-    align-items: flex-start;
+    // align-items: flex-start;
+    align-items: stretch;
 
     @media (max-width: 1199px) {
     
@@ -58,7 +60,7 @@
 
   &__filterBtn {
   
-    min-height: 56px;
+    // min-height: 56px;
     appearance: none;
     border-radius: 4px;
     outline: none;
@@ -97,7 +99,36 @@
     }
   }
 
-  &__findBtn {
+  &__selectBtn {
+    min-width: 213px;
+    font-family: "Roboto", sans-serif;
+    outline: none;
+    border: none;
+    // min-height: 56px;
+    // height: 100%;
+    background-color: #f5f5f5;
+  
+    border-radius: 4px;
+    display: flex;
+    padding: 12px;
+    align-items: center;
+    // justify-content: space-between;
+    justify-content: center;
+
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: 1.5;
+    letter-spacing: 0.5px;
+    
+  
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    @media (max-width: 991px) {
+      width: 100%;
+    }
+  
   }
 
   &__input {
