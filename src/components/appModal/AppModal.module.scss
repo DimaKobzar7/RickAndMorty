@@ -1,64 +1,255 @@
 .appModal {
-  // display: flex;
-  // position: absolute;
-  // top: 0;
-  // width: 100vw;
-  // height: 100vh;
-  // background-color: rgba(0, 0, 0, 0.8);
-  // justify-content: center;
-  // align-items: center;
-
-  // position: fixed;
-  // inset: 0;
-  // z-index: 1000;
-  // overflow: auto;
-  // outline: 0;
-  // background-color: rgba(0, 0, 0, 0.8);
-
-  // тут везде будет проблема с сафари
-  @media (max-width: 991px) {
-    width: 100% !important;
-    height: 100%;
-  }
-
+  // width: auto;
+ 
+// !Тут проблемы с фокусом инпутов
+// это проичсходит если выбираешь вариант из быстрых ответов что тебе предлагают
   &__body {
+    padding: 0;
     // display: flex;
-    // transform: translateY(-50%);
-    // height: auto;
-    // display: flex;
-    // align-items: flex-start;
-    // gap: 28px;
+    // flex-direction: column;
+    overflow: hidden;
+    border-radius: 20px;
+
+    background-color: #f5f5f5;
+    @media (max-width: 1199px) {
+    
+      max-width: 600px;
+    }
   }
 
-  &__mask {
-    background: gold;
-  }
-
-  &__header {
-    background: pink;
-  }
-
-  &__content {
-    background-color: green;
-  }
-
-  &__footer {
-    background-color: red;
-  }
-
-  // &__wrap {
-  //   width: auto;
-  //   height: 284px;
+  // проверка стилей через tsx в appModal
+  // &__mask {
+  //   // background: gold;
+  //   background-color: rgba(0, 0, 0, 0.8);
   // }
+
+  // &__header {
+  //   // background: pink;
+  //   // width: "auto",
+  // }
+
+  // &__content {
+  //   background-color: green;
+  //   background-color: transparent;
+  //   padding: 0;
+  //   box-shadow: none;
+   
+  // }
+
+  // &__footer {
+  //   background-color: red;
+  // }
+
+
+  &__form {
+    padding: 16px;
+  }
 
   &__wrap {
     display: flex;
-    // gap: 28px;
+  
     gap: 16px;
-    align-items: flex-start;
-    // height: 284px;
-    flex-wrap: wrap;
-    justify-content: center;
-    padding: 16px 0;
+
+  }
+
+  &__input {
+    padding: 16px 12px;
+   
+    background-color: #272b33;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+
+    font-weight: 400;
+    line-height: 1.5;
+  
+    color: white;
+    letter-spacing: 0.5px;
+    appearance: none;
+    outline: none;
+    border: none;
+    border-radius: 4px;
+
+    max-width: 180px;
+
+    @media (max-width: 1199px) {
+      max-width: calc(100% / 3 - 16px);
+    }
+
+    @media (max-width: 575px) {
+      max-width: calc(100% / 2 - 8px);
+      width: 100%;
+    }
+
+    &::placeholder {
+      font-size: 16px;
+
+      font-weight: 400;
+   
+      color: white;
+      line-height: 1.5;
+      letter-spacing: 0.5px;
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover, 
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      font-family: "Roboto", sans-serif;
+      // во время выбора ответа оно делает высоту но не меняет высоту самого выбора
+      font-size: 16px;
+
+      font-weight: 400;
+      line-height: 1.5;
+    
+      // простой цвет не работает
+      // color: white;
+      letter-spacing: 0.5px;
+      -webkit-text-fill-color: white ;
+      -webkit-box-shadow: 0 0 0px 1000px #272b33 inset;
+      transition: background-color 5000s ease-in-out 0s ;
+
+      caret-color: white;
+
+      // font-size: 48px!important;
+      // тесты для размера шрифта
+      // -webkit-text-size-adjust: 46px; /* Safari */
+      // -moz-text-size-adjust: 46px; /* Firefox */
+      // -ms-text-size-adjust: 46px; /* Internet Explorer */
+      // text-size-adjust: 46px; /* Общее свойство */
+
+      // увеличивает но все а не только шрифт
+      // zoom: 2;
+      // zoom: 1.2;
+      // zoom: 1.5;
+      // padding: 0;
+      // padding: 8px 6px;
+      // width: 100%;
+      // font-size: x-large !important;
+
+    }
+
+    // &:-webkit-autofill::first-line {
+    //   font-size: 44px !important;
+    // }
+
+    // не работает как нужно
+    // &:-webkit-autofill::first-line {
+    //   font-family: "Roboto", sans-serif;
+    //   font-size: 4rem;
+    //   font-weight: bold;
+    //   color: green;
+    // }
+
+    // &:-webkit-autofill,
+    // &:-webkit-autofill:hover,
+    // &:-webkit-autofill:focus,
+    // &:-webkit-autofill:active {
+    //   -webkit-animation: autofill 0s forwards;
+    //   animation: autofill 0s forwards;
+    // }
+
+    // @keyframes autofill {
+    //   100% {
+    //     background: transparent;
+    //     color: inherit;
+    //     // font-size: inherit;
+    //     font-size: 40px;
+    //   }
+    // }
+
+    // @-webkit-keyframes autofill {
+    //   100% {
+    //     background: transparent;
+    //     color: inherit;
+    //     // font-size: inherit;
+    //     font-size: 40px;
+    //   }
+
+    // &:-internal-autofill-previewed {
+    //   font-size: 22px !important;
+    // }
+
+    &-wrap {
+     
+      display: flex;
+      gap: 16px;
+     
+      border-radius: 4px;
+     
+    
+      @media (max-width: 1199px) {
+      
+        justify-content: space-between;
+        flex-wrap: wrap;
+      }
+      
+    }
+  }
+
+
+  &__icon {
+    color: #272b33;
+    // не сработало убрать синее свечение на кнопке
+    // -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    &:hover {
+      color: #272b33;
+      // -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+  }
+
+  &__filterBtn {
+
+    min-height: 56px;
+    appearance: none;
+    border-radius: 4px;
+    outline: none;
+    border: none;
+   
+    background-color: #272b33;
+   
+    min-width: 143px;
+
+    font-family: "Roboto", sans-serif;
+    font-size: 16px;
+    padding: 16px;
+
+    font-weight: 400;
+    line-height: 1.5;
+
+  
+    color: white;
+
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+
+    cursor: pointer;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+
+    // !влияет на все кнопки фильтров
+// transition: background-color 0.3s, color 0.3s;
+
+//     &:hover {
+//       background-color: #272b33;
+//       color: #f5f5f5;
+//     }
+
+    @media (max-width: 1199px) {
+      max-width: calc(100% / 3 - 16px);
+      width: 100%;
+    }
+
+
+    @media (max-width: 575px) {
+   
+      max-width: none;
+      width: 100%;
+    }
   }
 }

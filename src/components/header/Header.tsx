@@ -1,15 +1,9 @@
-// измени расширение на тайп скрипт
-
 import { Col, Row } from "antd";
 import headerStyles from "./Header.module.scss";
-import AppContainer from "../container/Container";
-import { Link } from "react-router-dom";
 
-import { useEffect, useRef } from "react";
+import { FC } from "react";
 
-const Header = () => {
-  const splitTextRef = useRef(null); // Ref for the split text container
-
+const Header: FC = () => {
   return (
     <header className={headerStyles["header"]}>
       <Row>
@@ -54,10 +48,7 @@ const Header = () => {
             fill='#F5F5F5'
           />
         </svg>
-        <h1
-          ref={splitTextRef}
-          className={`titleAnimation ${headerStyles["header__title"]}`}
-        >
+        <h1 className={`titleAnimation ${headerStyles["header__title"]}`}>
           The Rick and Morty API
         </h1>
       </div>

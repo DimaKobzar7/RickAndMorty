@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { FC, useEffect, useState } from "react";
 // import "./App.css";
 import { RouterProvider } from "react-router";
 
@@ -7,18 +7,22 @@ import FloatActionBtn from "./components/floatActionBtn/FloatActionBtn";
 // import { Button, ConfigProvider, Drawer } from "antd";
 import AppDrawer from "./components/appDrawer/AppDrawer";
 import { useDispatch, useSelector } from "react-redux";
+import { useAppSelector } from './hooks/hooks';
 
-const App = () => {
+const App: FC = () => {
   
-  const dispatch = useDispatch();
+  
+  // const dispatch = useDispatch();
 
   const [openDrawer, setOpenDrawer] = useState(false);
 
-  const disableDownloadBtn = useSelector(
+  const disableDownloadBtn = useAppSelector(
     (state) => state.secondTest.disableDownloadBtn
   );
 
-  const test2 = useSelector((state) => state.secondTest.characters2);
+ 
+  // const test2 = useSelector((state) => state.secondTest.characters2);
+  const test2 =  useAppSelector((state) => state.secondTest.characters2);
 
   const showDrawer = () => {
     console.log("history open");

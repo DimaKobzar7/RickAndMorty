@@ -1,8 +1,7 @@
 .homePage {
-  // flex: 1;
+ 
   background-color: #272b33;
-  // background-color: red;
-  // height: 100%;
+ 
   flex: 1 1 auto;
   // такой вариант прибивает футер к низу но он никогда не будет в зоне видимости пока мы не проскролим вниз
   // min-height: calc(100vh - 392px);
@@ -22,9 +21,19 @@
 
   &__cards {
     display: flex;
-    justify-content: center;
+   
     gap: 27px;
     flex-wrap: wrap;
-    // height: 100%;
+ 
+    justify-content: space-between;
+
+    @media (max-width: 1199px) {
+      gap: 16px;
+    }
+
+    @media (max-width: 450px) {
+      justify-content: center;
+    }
+
   }
 }

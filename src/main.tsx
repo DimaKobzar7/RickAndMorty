@@ -17,13 +17,14 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 
 import { Provider } from "react-redux";
-import store from "./store/index";
+import { store } from "./store/index";
 
 
 import "./assets/main.scss";
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement);
 
+// ! надо сделать сорс меп для файлов чтобы в браузере в инструментах видеть откуда идет код из какого файла
 root.render(
   // <React.StrictMode>
 

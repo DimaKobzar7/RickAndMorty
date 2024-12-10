@@ -5,7 +5,7 @@ import Footer from "../components/footer/Footer";
 import Header from "../components/header/Header";
 import mainLayoutStyles from "./MainLayout.module.scss";
 
-const MainLayout = () => {
+const MainLayout: React.FC = () => {
   // const navigation = useNavigation()
   // const navigation = useNavigation();
   // const navigate = useNavigate();
@@ -15,10 +15,7 @@ const MainLayout = () => {
     <div className={mainLayoutStyles["mainLayout"]}>
       <main className={mainLayoutStyles["mainLayout__content"]}>
         <Header />
-        {/* возможно сюда чайлд а не оутлет хотя оно все в роуте стоит  */}
-        {/* <div> */}
         <Outlet />
-        {/* </div> */}
       </main>
 
       <Footer />
